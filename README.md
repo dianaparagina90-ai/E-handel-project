@@ -1,2 +1,3 @@
 # E-handel-project
-Bygga en e-handel applikation med React och Vite
+
+Bygga en e-handel applikation med React och Typescript
