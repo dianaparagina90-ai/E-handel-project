@@ -1,0 +1,126 @@
+
+
+{"products" : [
+{
+    "id": 1,
+    "name": "Silkeshår Schampoo",
+    "price": 345,
+    "categoryId": 1,
+    "image": "https://images.unsplash.com/photo-1686121544103-f1bc403bd6da?w=600&h=750&fit=crop&auto=format",
+    "description": "Lyxig schampoo med argan- och jojobaolja. Återfuktar och ger silkeslen glans utan att tynga ner."
+  },
+  {
+    "id": 2,
+    "name": "Djupvårdande Hårmask",
+    "price": 289,
+    "categoryId": 1,
+    "image": "https://images.unsplash.com/photo-1646109324106-2427a6341f55?w=600&h=750&fit=crop&auto=format",
+    "description": "Intensiv hårmask med keratin och rosolja. Lämna i 10 minuter för mjukt och glansigt hår."
+  },
+  {
+    "id": 3,
+    "name": "Värmeskydd & Glansserum",
+    "price": 219,
+    "categoryId": 1,
+    "image": "https://images.unsplash.com/photo-1747098393451-6b985f62a2c2?w=600&h=750&fit=crop&auto=format",
+    "description": "Skyddar mot värme upp till 230°C. Ger spegelblankt resultat och minskar frizz."
+  },
+
+  {
+    "id": 4,
+    "name": "Siden Kimono",
+    "price": 1490,
+    "categoryId": 2,
+    "image": "https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?w=600&h=750&fit=crop&auto=format",
+    "description": "Handmålad kimono i 100% naturligt siden. Lös passform med vida ärmar och skärp."
+  },
+  {
+    "id": 5,
+    "name": "Ribbad Midi-klänning",
+    "price": 890,
+    "categoryId": 2,
+    "image": "https://images.unsplash.com/photo-1603400521630-9f2de124b33b?w=600&h=750&fit=crop&auto=format",
+    "description": "Mjukt ribbat jersey i ekologisk bomull. Smickrande midi-längd med djup urringning."
+  },
+  {
+    "id": 6,
+    "name": "Floralblommig Wrap",
+    "price": 750,
+    "categoryId": 2,
+    "image": "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=600&h=750&fit=crop&auto=format",
+    "description": "Omlottklänning i viskose med handtryckt blomstermönster. Justerbara knytsömmar."
+  },
+  {
+    "id": 7,
+    "name": "Velvet Läppstift",
+    "price": 195,
+    "categoryId": 3,
+    "image": "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&h=750&fit=crop&auto=format",
+    "description": "Krämigt läppstift med velvet-finish. Lång hållbarhet och intensiv pigmentering. Veganskt."
+  },
+  {
+    "id": 8,
+    "name": "Glow Highlighter Palett",
+    "price": 349,
+    "categoryId": 3,
+    "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=750&fit=crop&auto=format",
+    "description": "Fyra highlighter-nyanser från champagne till roséguld. Buildbar täckning, vegansk formel."
+  },
+  {
+    "id": 9,
+    "name": "Naturlig Foundation",
+    "price": 425,
+    "categoryId": 3,
+    "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&h=750&fit=crop&auto=format",
+    "description": "Lätt foundation med SPF 30. Jämnar ut hudtonen och ger en naturlig, hudlik finish."
+  },
+  {
+    "id": 10,
+    "name": "Blommig Spets-BH",
+    "price": 490,
+    "categoryId": 4,
+    "image": "https://images.unsplash.com/photo-1594631407335-389350e00784?w=600&h=750&fit=crop&auto=format",
+    "description": "Fransk spets i delikat blomstermönster. Mjuk vadderade kupor och justerbara band."
+  },
+  {
+    "id": 11,
+    "name": "Siden-slip Set",
+    "price": 695,
+    "categoryId": 4,
+    "image": "https://images.unsplash.com/photo-1494354205675-139c8101dfa5?w=600&h=750&fit=crop&auto=format",
+    "description": "Matchande set i 100% siden. Inkluderar bralette och midi-slip. Handtvätt rekommenderas."
+  },
+  {
+    "id": 12,
+    "name": "Rosenkvarts Natlinne",
+    "price": 545,
+    "categoryId": 4,
+    "image": "https://images.unsplash.com/photo-1664158162601-79d988a17334?w=600&h=750&fit=crop&auto=format",
+    "description": "Mjukt natlinne i modal och siden-mix. A-line passform med spetsdetaljer i urringning."
+  }
+],
+
+"categories" :[
+  {
+    "id": 1,
+    "name": "Hårprodukter"
+  },
+  {
+    "id": 2,
+    "name": "Kläder"
+  },
+  {
+    "id": 3,
+    "name": "Smink"
+  },
+  {
+    "id": 4,
+    "name": "Underkläder"
+  }
+],
+"orders": []
+
+}
+  
+
+
