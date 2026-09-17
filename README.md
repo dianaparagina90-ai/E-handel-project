@@ -1,16 +1,36 @@
 # E-handel-project
 
-Bygga en e-handel applikation med React och Typescript
+Bygga en e-handelsapplikation med React och TypeScript.
 
-- satsar på G men vi kör med Tanstack Query
-- kundkorgen utseende ( om det blir modal eller inte) kommer bestämmas i senare skedde ( kolla Material UI om det går att funka med)
+- Satsar på G, men vi kör med TanStack Query.
+- Kundkorgens utseende: undersök Material UI eller andra relevanta bibliotek.
 
-16 sep 2026 fm
+## Klart
 
-- stämma av när ska presenteras till Fredrik
+- Projektet har presenterats för Fredrik.
+- Diagrammet har gåtts igenom.
+- Tickets och issues har skapats i GitHub Kanban.
+- Följande huvuddelar har skapats:
 
-Att göra sen:
+  - Products Page
+  - Product Details Page
+  - Cart Page
 
-- bilderna som t ex logo ska hämtas från public eller assets? Kolla vilken är enklaste
-- CartPage komponenten ska poppas upp som modal eller egen sida?
-- vilken data ska vara i Context
+- Varje huvuddel har fått tydliga beskrivningar och deluppgifter.
+- Tickets för Header och Footer har också skapats.
+
+## Kvar att göra
+
+- Varje person väljer en huvuddel att ansvara för:
+  - Products Page
+  - Product Details Page
+  - Cart Page
+- Skriv i chatten vilken huvuddel du vill ta och när du kan börja.
+- Om någon gör ändringar i en ticket ska det skrivas i chatten, så att alla har koll.
+
+
+## Att göra sen
+
+- Bestäm om bilder, exempelvis logotypen, ska hämtas från `public` eller `assets`.
+- Bestäm om Cart Page ska vara en modal eller en egen sida.
+- Bestäm vilken data som ska finnas i Context.
