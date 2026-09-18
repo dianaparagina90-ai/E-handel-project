@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+:root {
+    /* Colors */
+  --background: #fdf8f6;
+  --foreground: #2c1f1a;
+  --card: #fff9f7;
+  --card-foreground: #2c1f1a;
+  --primary: #2c1f1a;
+  --primary-foreground: #fdf8f6;
+  --secondary: #f5e8e3;
+  --secondary-foreground: #2c1f1a;
+  --muted: #f0e5e0;
+  --muted-foreground: #9e7e75;
+  --accent: #c4607a;
+  --accent-foreground: #fff9f7;
+  --border: #e8d5cf;
+  --ring: #c4607a;
+
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+}
+
+.font-display {
+  font-family: 'Cormorant Infant', serif;
+}

@@ -4,6 +4,7 @@ import ProductDetailPage from "./components/pages/ProductDetailPage";
 import CartPage from "./components/pages/CartPage";
 import CheckoutPage from "./components/pages/CheckoutPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
+import "./App.css";
 
 const App = () => {
   return (
