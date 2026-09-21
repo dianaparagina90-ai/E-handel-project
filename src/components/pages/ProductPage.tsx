@@ -1,5 +1,10 @@
+import { useProducts } from "../../hooks/useProducts";
+
 function ProductPage() {
-  const placeholderCount = 12;
+  const { data: products, isLoading, isError, error } = useProducts();
+
+  if (isLoading) return <p> Laddar produkter....</p>;
+  if (isError) return <p>{error.message}</p>;
 
   return (
     <div>
@@ -27,13 +32,13 @@ function ProductPage() {
       <div className="max-w-7xl mx-auto px-4">
         <h1 className="font-display text-3xl">Alla Produkter</h1>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-12">
-          {Array.from({ length: placeholderCount }).map((_, i) => (
+          {products.map((product) => (
             <div
-              key={i}
+              key={product.id}
               className="aspect-3/4 bg-(--card) flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
             >
               <span className="text-sm text-(--muted-foreground)">
-                Produkt {i + 1}
+                {product.name}
               </span>
             </div>
           ))}
