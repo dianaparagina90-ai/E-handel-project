@@ -6,20 +6,22 @@ import CheckoutPage from "./components/pages/CheckoutPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
 import Header from "./components/Header";
 import "./App.css";
+import CartItemProvider from "./components/context/CartItemContext";
 
 const App = () => {
   return (
     <div>
-      <Header />
-      <Routes>
-      <Route path="/" element={<ProductPage />} />
-      <Route path="/ProductDetail" element={<ProductDetailPage />} />
-      <Route path="/Cart" element={<CartPage />} />
-      <Route path="/Checkout" element={<CheckoutPage />} />
-      <Route path="/Confirmation" element={<ConfirmationPage />} />
-    </Routes>
+      <CartItemProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<ProductPage />} />
+          <Route path="/ProductDetail" element={<ProductDetailPage />} />
+          <Route path="/Cart" element={<CartPage />} />
+          <Route path="/Checkout" element={<CheckoutPage />} />
+          <Route path="/Confirmation" element={<ConfirmationPage />} />
+        </Routes>
+      </CartItemProvider>
     </div>
-  
   );
 };
 
