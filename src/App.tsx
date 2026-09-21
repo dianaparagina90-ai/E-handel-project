@@ -5,12 +5,16 @@ import CartPage from "./components/pages/CartPage";
 import CheckoutPage from "./components/pages/CheckoutPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import "./App.css";
 
 const App = () => {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Header />
+
+      <main className="flex-1">
+
       <Routes>
       <Route path="/" element={<ProductPage />} />
       <Route path="/ProductDetail" element={<ProductDetailPage />} />
@@ -18,6 +22,10 @@ const App = () => {
       <Route path="/Checkout" element={<CheckoutPage />} />
       <Route path="/Confirmation" element={<ConfirmationPage />} />
     </Routes>
+
+      </main>
+      
+    <Footer />
     </div>
   
   );

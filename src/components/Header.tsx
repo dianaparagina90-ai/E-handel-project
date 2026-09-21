@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import cartIcon from "../assets/cartIcon.png";
+import Logo from '../Logo';
 
 function Header () {
     return (
@@ -14,19 +15,8 @@ function Header () {
 
         <div className="bg-[#fdf8f6] flex justify-between items-center px-8 py-5">
 
-            <div>
-                <Link to="/" className="inline-flex flex-col items-center leading-none">
-            <span className="font-display text-[10px] italic tracking-[0.2em] text-[#c4607a]">
-                Fredrik's
-            </span>
-
-            <span className="font-display text-2xl uppercase tracking-[0.22em] text-[#2c1f1a]">
-                Angels
-            </span>
-
-            </Link>
-            </div>
-
+            <Logo />
+            
             <div>
                 <Link to="/Cart" aria-label="Öppna kundvagn">
                 <img
