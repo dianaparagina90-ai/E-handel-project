@@ -7,10 +7,12 @@ import ConfirmationPage from "./components/pages/ConfirmationPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.css";
+import CartItemProvider from "./components/context/CartItemContext";
 
 const App = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <CartItemProvider>
       <Header />
 
       <main className="flex-1">
@@ -24,10 +26,10 @@ const App = () => {
     </Routes>
 
       </main>
-      
+        </CartItemProvider>      
     <Footer />
+ 
     </div>
-  
   );
 };
 
