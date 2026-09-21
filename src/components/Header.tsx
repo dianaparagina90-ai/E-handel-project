@@ -14,12 +14,21 @@ function Header () {
 
         <div className="bg-[#fdf8f6] flex justify-between items-center px-8 py-5">
 
-            <div className="font-display text-2xl tracking-[0.2em]">
-                <Link to="/">Fredrik's Angels</Link>
+            <div>
+                <Link to="/" className="inline-flex flex-col items-center leading-none">
+            <span className="font-display text-[10px] italic tracking-[0.2em] text-[#c4607a]">
+                Fredrik's
+            </span>
+
+            <span className="font-display text-2xl uppercase tracking-[0.22em] text-[#2c1f1a]">
+                Angels
+            </span>
+
+            </Link>
             </div>
 
             <div>
-                <Link to="/Cart">
+                <Link to="/Cart" aria-label="Öppna kundvagn">
                 <img
                 src={cartIcon}
                 alt="Kundvagn"
