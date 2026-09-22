@@ -5,14 +5,17 @@ import CartPage from "./components/pages/CartPage";
 import CheckoutPage from "./components/pages/CheckoutPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import "./App.css";
+import CartItemProvider from "./components/context/CartItemContext";
 
 const App = () => {
   return (
-    <div>
-      <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen flex flex-col">
+      <CartItemProvider>
+        <Header />
+
         <main className="flex-1">
-          <Header />
           <Routes>
             <Route path="/" element={<ProductPage />} />
             <Route path="/ProductDetail" element={<ProductDetailPage />} />
@@ -21,7 +24,8 @@ const App = () => {
             <Route path="/Confirmation" element={<ConfirmationPage />} />
           </Routes>
         </main>
-      </div>
+      </CartItemProvider>
+      <Footer />
     </div>
   );
 };

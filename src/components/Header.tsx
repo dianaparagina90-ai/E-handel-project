@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import cartIcon from "../assets/cartIcon.png";
+import Logo from '../Logo';
 
 function Header () {
     return (
@@ -14,12 +15,10 @@ function Header () {
 
         <div className="bg-[#fdf8f6] flex justify-between items-center px-8 py-5">
 
-            <div className="font-display text-2xl tracking-[0.2em]">
-                <Link to="/">Fredrik's Angels</Link>
-            </div>
-
+            <Logo />
+            
             <div>
-                <Link to="/Cart">
+                <Link to="/Cart" aria-label="Öppna kundvagn">
                 <img
                 src={cartIcon}
                 alt="Kundvagn"
