@@ -1,6 +1,8 @@
+import type { Product } from "../types/product";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
-export async function fetchProducts() {
+export async function fetchProducts(): Promise<Product[]> {
   const res = await fetch(`${API_URL}/products`);
   if (!res.ok) {
     throw new Error("Kunde inte hämta produkter");

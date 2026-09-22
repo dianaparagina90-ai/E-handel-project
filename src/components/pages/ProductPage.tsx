@@ -1,10 +1,14 @@
+import { useCategories } from "../../hooks/useCategories";
 import { useProducts } from "../../hooks/useProducts";
+import ProductCard from "../ProductCard";
 
 function ProductPage() {
   const { data: products, isLoading, isError, error } = useProducts();
+  const { data: categories } = useCategories();
 
   if (isLoading) return <p> Laddar produkter....</p>;
   if (isError) return <p>{error.message}</p>;
+  if (!products) return null;
 
   return (
     <div>
@@ -33,14 +37,14 @@ function ProductPage() {
         <h1 className="font-display text-3xl">Alla Produkter</h1>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-12">
           {products.map((product) => (
-            <div
+            <ProductCard
               key={product.id}
-              className="aspect-3/4 bg-(--card) flex items-center justify-center shadow-sm hover:shadow-md transition-shadow"
-            >
-              <span className="text-sm text-(--muted-foreground)">
-                {product.name}
-              </span>
-            </div>
+              product={product}
+              categoryName={
+                categories?.find((c) => c.id === String(product.categoryId))
+                  ?.name
+              }
+            />
           ))}
         </div>
       </div>
