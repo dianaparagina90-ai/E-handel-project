@@ -1,4 +1,4 @@
-import type { Product } from "../types/product";
+import type { Product } from "../types/types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
