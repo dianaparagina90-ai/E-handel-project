@@ -13,22 +13,19 @@ const App = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <CartItemProvider>
-      <Header />
+        <Header />
 
-      <main className="flex-1">
-
-      <Routes>
-      <Route path="/" element={<ProductPage />} />
-      <Route path="/ProductDetail" element={<ProductDetailPage />} />
-      <Route path="/Cart" element={<CartPage />} />
-      <Route path="/Checkout" element={<CheckoutPage />} />
-      <Route path="/Confirmation" element={<ConfirmationPage />} />
-    </Routes>
-
-      </main>
-        </CartItemProvider>      
-    <Footer />
- 
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<ProductPage />} />
+            <Route path="/ProductDetail" element={<ProductDetailPage />} />
+            <Route path="/Cart" element={<CartPage />} />
+            <Route path="/Checkout" element={<CheckoutPage />} />
+            <Route path="/Confirmation" element={<ConfirmationPage />} />
+          </Routes>
+        </main>
+      </CartItemProvider>
+      <Footer />
     </div>
   );
 };
