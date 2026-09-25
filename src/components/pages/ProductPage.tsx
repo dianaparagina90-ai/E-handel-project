@@ -1,10 +1,20 @@
+import { useState } from "react";
 import { useCategories } from "../../hooks/useCategories";
 import { useProducts } from "../../hooks/useProducts";
 import ProductCard from "../ProductCard";
+import CategoryFilter from "../CategoryFilter";
 
 function ProductPage() {
   const { data: products, isLoading, isError, error } = useProducts();
   const { data: categories } = useCategories();
+
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const filteredProducts = selectedCategory
+    ? products?.filter((p) => String(p.categoryId) === selectedCategory)
+    : products;
+  const selectedCategoryName = selectedCategory
+    ? categories?.find((c) => c.id === selectedCategory)?.name
+    : "Alla Produkter";
 
   if (isLoading) return <p> Laddar produkter....</p>;
   if (isError) return <p>{error.message}</p>;
@@ -33,10 +43,18 @@ function ProductPage() {
           <h1 className="font-display text-6xl italic">det bästa</h1>
         </div>
       </div>
+
       <div className="max-w-7xl mx-auto px-4">
-        <h1 className="font-display text-3xl">Alla Produkter</h1>
+        <CategoryFilter
+          categories={categories ?? []}
+          selected={selectedCategory}
+          onSelect={setSelectedCategory}
+        />
+        <div>
+          <h1 className="font-display text-3xl p-5">{selectedCategoryName}</h1>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-12">
-          {products.map((product) => (
+          {filteredProducts?.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
