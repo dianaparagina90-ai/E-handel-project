@@ -17,3 +17,13 @@ export type CartItem = {
     productId: number;
     quantity: number;
 }
+
+export interface Order {
+  id: number;
+  items: CartItem[];
+  totalAmount: number;
+  customerDetails:string;
+  paymentMethod: string;
+  orderDate: string;
+  status: 'pending' | 'completed' | 'cancelled';
+}
