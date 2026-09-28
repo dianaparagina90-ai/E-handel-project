@@ -5,6 +5,7 @@ import PaymentForm from "../PaymentForm";
 import type { CustomerInfo, Payment, Shipping } from "../../schemas/checkout";
 import { useCart } from "../../hooks/useCart";
 import { useProducts } from "../../hooks/useProducts";
+import CartItem from "./CartItem";
 
 type Step = 1 | 2 | 3;
 
@@ -88,11 +89,30 @@ function CheckoutPage() {
           </button>
         </div>
 
-        <div className="bg-(--card) p-6 rounded-lg h-fit">
+        <div className="bg-(--card) p-4 sm:p-0 rounded-lg h-fit flex flex-col gap-1 ">
           <h2 className="font-display text-xl mb-4">Din order</h2>
-          <p className="text-sm text-(--muted-foreground)">
-            [Cart-lista kommer här]
-          </p>
+          {/*rendering om listan med produkter*/}
+          <div className="sm:flex sm:flex-col sm: gap-2">
+            {cartItems.map((cartItem) => {
+              const product = products?.find(
+                (product) => product.id === cartItem.productId,
+              );
+
+              if (!product) {
+                return null;
+              }
+
+              return (
+                <CartItem
+                  key={product.id}
+                  product={product}
+                  quantity={cartItem.quantity}
+                  editable={false}
+                />
+              );
+            })}
+          </div>
+          {/*Byggas vidare med totalen och allt annat som behövs*/}
         </div>
       </div>
     </div>

@@ -27,3 +27,13 @@ export interface Order {
   orderDate: string;
   status: 'pending' | 'completed' | 'cancelled';
 }
+
+export interface CartItemProps {
+    product: Product; 
+    quantity: number;
+    editable?: boolean;
+    onIncrease?: ()=> void;
+    onDecrease?: ()=> void;
+    onRemove?: ()=> void
+
+}
