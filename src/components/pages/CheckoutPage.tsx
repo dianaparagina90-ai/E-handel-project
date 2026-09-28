@@ -3,17 +3,41 @@ import CustomerInfoForm from "../CustomerInfoForm";
 import ShippingForm from "../ShippingForm";
 import PaymentForm from "../PaymentForm";
 import type { CustomerInfo, Payment, Shipping } from "../../schemas/checkout";
+import { useCart } from "../../hooks/useCart";
+import { useProducts } from "../../hooks/useProducts";
 
 type Step = 1 | 2 | 3;
 
 function CheckoutPage() {
+  const { cartItems } = useCart();
+  const { data: products } = useProducts();
+
   const [step, setStep] = useState<Step>(1);
 
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo | null>(null);
   const [shipping, setShipping] = useState<Shipping | null>(null);
   const [payment, setPayment] = useState<Payment | null>(null);
 
+  const orderItems = cartItems.flatMap((item) => {
+    const product = products?.find((p) => p.id === item.productId);
+    if (!product) return [];
+    return [
+      {
+        productId: item.productId,
+        name: product.name,
+        price: product.price,
+        quantity: item.quantity,
+      },
+    ];
+  });
+
+  const subtotal = orderItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
+
   const allStepsComplete = customerInfo && shipping && payment;
+
   function handlePay() {
     if (!allStepsComplete) return;
 
@@ -21,6 +45,8 @@ function CheckoutPage() {
       customerInfo,
       shipping,
       payment,
+      items: cartItems, // productId, quantity
+      subtotal,
     };
 
     console.log("Order redo att skickas:", order);
