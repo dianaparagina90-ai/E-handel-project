@@ -2,9 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
 import { useCart } from "../../hooks/useCart";
 
-
 function ProductDetailPage() {
-  
   const { id } = useParams();
   const { addToCart } = useCart();
   const navigate = useNavigate();
@@ -15,62 +13,92 @@ function ProductDetailPage() {
 
   if (product.isLoading) {
     return <p>Laddar...</p>;
-    }
+  }
 
   if (product.isError) {
     return <p>Något gick fel.</p>;
-    }
+  }
 
   if (!product.data) {
-    return <p>Ingen produkt hittades.</p>
+    return <p>Ingen produkt hittades.</p>;
   }
 
   return (
+    
+    <div className="max-w-5xl mx-auto px-6 py-12">
+      {/* HELA PRODUKTDETALJSIDAN */}
 
-    <div>
-
-      <button onClick={() => navigate(-1)}>
-        ← Tillbaka
+      <button className="py-2 text-xs mb-6 cursor-default transition-colors hover:text-[#c4607a]"
+        onClick={() => navigate(-1)}>
+        &lt; TILLBAKA 
       </button>
 
-      <h1>{product.data.product.name}</h1>
-      <p>{product.data.product.price} kr</p>
-      <p>{product.data.product.description}</p>
-      <p>{product.data.category.name}</p>
+      {/* LAYOUT: BILDER + PRODUKTINFO */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 
+        {/* BILDSEKTION */}
+        <div className="flex flex-col gap-y-6">
 
-      <button onClick={() => addToCart(product.data.product.id)}>
-        Lägg i varukorgen
-      </button>
+          {/* STOR PRODUKTBILD */}
+          <img
+            src={product.data.product.image}
+            alt={product.data.product.name}
+            className="w-full"
+          />
 
-      {/* Produktbilder */}
-      <img
-        src={product.data.product.image}
-        alt={product.data.product.name}
-        className="w-full"
-      />
+          {/* SMÅ PRODUKTBILDER */}
+          <div className="flex justify-start gap-3">
+            <img
+              src={product.data.product.image}
+              alt={product.data.product.name}
+              className="w-24 object-cover cursor-pointer"
+            />
 
-      {/* Tre mindre bilder */}
-      <div>
+            <img
+              src={product.data.product.image}
+              alt={product.data.product.name}
+              className="w-24 object-cover cursor-pointer"
+            />
 
-      <img src={product.data.product.image}
-        alt={product.data.product.name}
-        className="w-20"
-        />
-      <img src={product.data.product.image}
-        alt={product.data.product.name}
-        className="w-20"
-        />
-      <img src={product.data.product.image}
-        alt={product.data.product.name}
-        className="w-20"
-        />
+            <img
+              src={product.data.product.image}
+              alt={product.data.product.name}
+              className="w-24 object-cover cursor-pointer"
+            />
+          </div>
+        </div>
 
+        {/* PRODUKTINFORMATION */}
+        <div className="flex flex-col justify-center gap-4">
+
+          <p className="text-[#c4607a]">
+            {product.data.category.name}</p>
+
+          <h1 className="font-display text-3xl font-medium ">
+            {product.data.product.name}</h1>
+
+          <p className="text-[#c4607a] py-5 font-small">
+            {product.data.product.price} kr</p>
+
+          <p className="font-base gap-4 text-sm leading-relaxed">
+            {product.data.product.description}</p>
+
+          {/* KNAPP */}
+          <div className="pt-4">
+            <button className="w-full px-8 py-4 bg-[#c4607a] text-white font-base"
+            onClick={() => {
+              addToCart(product.data.product.id);
+            }}
+          >
+            LÄGG I VARUKORG
+          </button>
+          </div>
+
+          
+        </div>
       </div>
-
     </div>
   );
 }
-
 
 export default ProductDetailPage;
