@@ -14,7 +14,7 @@ export const CartItemContext = createContext<ICartContextType | null>(null);
 const CartItemProvider = ({ children }: PropsWithChildren) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  //Läga produkt i kundvagnen
+  //Lägga produkt i kundvagnen
   const addToCart = (productId: number) => {
     setCartItems((items) => {
       const existingItem = items.find((item) => item.productId === productId);
