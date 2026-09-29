@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import type { Product } from "../types/types";
 import cartIcon from "../assets/cartIcon.png";
 import { useCart } from "../hooks/useCart";
@@ -10,9 +11,13 @@ function ProductCard({
   categoryName?: string;
 }) {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   return (
-    <div className=" relative shadow-sm hover:shadow-xl transition-shadow">
+
+    <div className="relative shadow-sm hover:shadow-xl transition-shadow"
+    onClick={() => navigate(`/ProductDetail/${product.id}`)}>
+
       <div className="aspect-3/4 bg-(--card) overflow-hidden">
         <img
           src={product.image}

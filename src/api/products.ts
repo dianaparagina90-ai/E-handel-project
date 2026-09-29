@@ -10,3 +10,11 @@ export async function fetchProducts(): Promise<Product[]> {
   return res.json();
 }
 fetchProducts().then(console.log);
+
+export async function fetchSingleProduct(id: number): Promise<Product> {
+  const res = await fetch(`${API_URL}/products/${id}`);
+  if (!res.ok) {
+    throw new Error("Kunde inte hämta produkter");
+  }
+  return res.json();
+}

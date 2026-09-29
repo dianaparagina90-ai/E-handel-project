@@ -9,3 +9,11 @@ export async function fetchCategories(): Promise<Category[]> {
   }
   return res.json();
 }
+
+export async function fetchSingleCategory(id: number): Promise<Category> {
+  const res = await fetch(`${API_URL}/category/${id}`);
+  if (!res.ok) {
+    throw new Error("Kunde inte hämta kategorier");
+  }
+  return res.json();
+}

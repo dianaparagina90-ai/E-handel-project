@@ -10,14 +10,21 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
-const stepLabels = ["Kunduppgifter", "Leverans", "Betalning"];
-type Step = 1 | 2 | 3;
+import { useCreateOrder } from "../../hooks/useCreateOrder";
+import type { Order } from "../../types/types";
+import { useNavigate } from "react-router-dom";
+
+type CheckoutStep = 1 | 2 | 3;
 
 function CheckoutPage() {
   const { cartItems } = useCart();
   const { data: products } = useProducts();
+  const { mutate: createOrder, isPending } = useCreateOrder();
+  const navigate = useNavigate();
 
-  const [step, setStep] = useState<Step>(1);
+  const [step, setStep] = useState<CheckoutStep>(1);
+
+  const stepLabels = ["Kunduppgifter", "Leverans", "Betalning"];
 
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo | null>(null);
   const [shipping, setShipping] = useState<Shipping | null>(null);
@@ -50,16 +57,27 @@ function CheckoutPage() {
   function handlePay(paymentData: Payment) {
     if (!customerInfo || !shipping) return;
 
-    const order = {
-      customerInfo,
-      shipping,
-      payment: paymentData,
-      items: cartItems, // productId, quantity
-      subtotal,
+    const order: Order = {
+      id: 0,
+      items: orderItems,
+      totalAmount: subtotal,
+      customerDetails: JSON.stringify(customerInfo),
+      shippingMethod: shipping.method,
+      paymentMethod: paymentData.method,
+      orderDate: new Date().toISOString(),
     };
 
-    console.log("Order redo att skickas:", order);
-    // TODO: koppla in db-logik här
+    console.log("Order skapas: ", order);
+
+    createOrder(order, {
+      onSuccess: (data) => {
+        console.log("Skapad order: ", data);
+        navigate("/Confirmation");
+      },
+      onError: (error) => {
+        console.error("ORDER MISSLYCKADES:", error);
+      },
+    });
   }
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -121,9 +139,10 @@ function CheckoutPage() {
             <button
               type="submit"
               form="checkout-form"
+              disabled={isPending}
               className="flex-1 py-3.5 text-xs tracking-widest uppercase bg-(--accent) text-(--accent-foreground) transition-opacity hover:opacity-80"
             >
-              {nextLabel}
+              {isPending ? "Betalar..." : nextLabel}
             </button>
           </div>
         </div>
