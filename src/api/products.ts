@@ -9,4 +9,4 @@ export async function fetchProducts(): Promise<Product[]> {
   }
   return res.json();
 }
-fetchProducts().then(console.log);
+// fetchProducts().then(console.log);

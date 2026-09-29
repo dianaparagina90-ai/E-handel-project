@@ -7,11 +7,17 @@ import { useCart } from "../../hooks/useCart";
 import { useProducts } from "../../hooks/useProducts";
 import CartItem from "./CartItem";
 
+import { useCreateOrder } from "../../hooks/useCreateOrder";
+import type { Order } from "../../types/types";
+import { useNavigate } from "react-router-dom";
+
 type Step = 1 | 2 | 3;
 
 function CheckoutPage() {
   const { cartItems } = useCart();
   const { data: products } = useProducts();
+  const { mutate: createOrder, isPending } = useCreateOrder();
+  const navigate = useNavigate();
 
   const [step, setStep] = useState<Step>(1);
 
@@ -39,19 +45,32 @@ function CheckoutPage() {
 
   const allStepsComplete = customerInfo && shipping && payment;
 
-  function handlePay() {
+  function handlePay(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+
     if (!allStepsComplete) return;
 
-    const order = {
-      customerInfo,
-      shipping,
-      payment,
-      items: cartItems, // productId, quantity
-      subtotal,
+    const order: Order = {
+      id: 0,
+      items: orderItems,
+      totalAmount: subtotal,
+      customerDetails: JSON.stringify(customerInfo),
+      shippingMethod: shipping.method,
+      paymentMethod: payment.method,
+      orderDate: new Date().toISOString(),
     };
 
-    console.log("Order redo att skickas:", order);
-    // TODO: koppla in db-logik här
+    console.log("Order skapas: ", order);
+
+    createOrder(order, {
+      onSuccess: (data) => {
+        console.log("Skapad order: ", data);
+        navigate("/Confirmation");
+      },
+      onError: (error) => {
+        console.error("ORDER MISSLYCKADES:", error);
+      },
+    });
   }
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -80,12 +99,14 @@ function CheckoutPage() {
               }}
             />
           )}
+
           <button
+            type="button"
             onClick={handlePay}
-            disabled={!allStepsComplete}
+            disabled={!allStepsComplete || isPending}
             className="bg-(--primary) text-(--primary-foreground) py-3 disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            Betala
+            {isPending ? "Betalar..." : "Betala"}
           </button>
         </div>
 
