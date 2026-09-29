@@ -28,9 +28,10 @@ export interface Order {
   items: CartItem[];
   totalAmount: number;
   customerDetails:string;
+  shippingMethod:string;
   paymentMethod: string;
   orderDate: string;
-  status: 'pending' | 'completed' | 'cancelled';
+  
 }
 
 export interface CartItemProps {
