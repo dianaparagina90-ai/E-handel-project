@@ -6,7 +6,11 @@ import type { CustomerInfo, Payment, Shipping } from "../../schemas/checkout";
 import { useCart } from "../../hooks/useCart";
 import { useProducts } from "../../hooks/useProducts";
 import CartItem from "./CartItem";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
 
+const stepLabels = ["Kunduppgifter", "Leverans", "Betalning"];
 type Step = 1 | 2 | 3;
 
 function CheckoutPage() {
@@ -37,15 +41,19 @@ function CheckoutPage() {
     0,
   );
 
-  const allStepsComplete = customerInfo && shipping && payment;
+  const nextLabel = {
+    1: "Nästa: Leverans →",
+    2: "Nästa: Betalning →",
+    3: "Betala",
+  }[step];
 
-  function handlePay() {
-    if (!allStepsComplete) return;
+  function handlePay(paymentData: Payment) {
+    if (!customerInfo || !shipping) return;
 
     const order = {
       customerInfo,
       shipping,
-      payment,
+      payment: paymentData,
       items: cartItems, // productId, quantity
       subtotal,
     };
@@ -55,10 +63,27 @@ function CheckoutPage() {
   }
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
+      <Stepper
+        activeStep={step - 1}
+        alternativeLabel
+        sx={{
+          mb: 6,
+          "& .Mui-active": { color: "var(--accent) !important" },
+          "& .Mui-completed": { color: "var(--accent) !important" },
+        }}
+      >
+        {stepLabels.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-2">
+          <h2 className="font-display text-2xl mb-6">{stepLabels[step - 1]}</h2>
           {step === 1 && (
             <CustomerInfoForm
+              defaultValues={customerInfo}
               onNext={(data) => {
                 setCustomerInfo(data);
                 setStep(2);
@@ -67,6 +92,7 @@ function CheckoutPage() {
           )}
           {step === 2 && (
             <ShippingForm
+              defaultValues={shipping}
               onNext={(data) => {
                 setShipping(data);
                 setStep(3);
@@ -75,18 +101,31 @@ function CheckoutPage() {
           )}
           {step === 3 && (
             <PaymentForm
+              defaultValues={payment}
               onNext={(data) => {
                 setPayment(data);
+                handlePay(data);
               }}
             />
           )}
-          <button
-            onClick={handlePay}
-            disabled={!allStepsComplete}
-            className="bg-(--primary) text-(--primary-foreground) py-3 disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            Betala
-          </button>
+          <div className="flex gap-3 mt-20">
+            {step > 1 && (
+              <button
+                type="button"
+                onClick={() => setStep(step === 3 ? 2 : 1)}
+                className="px-6 py-3.5 text-xs tracking-widest uppercase border border-(--border) text-(--muted-foreground) transition-opacity hover:opacity-60"
+              >
+                ← Tillbaka
+              </button>
+            )}
+            <button
+              type="submit"
+              form="checkout-form"
+              className="flex-1 py-3.5 text-xs tracking-widest uppercase bg-(--accent) text-(--accent-foreground) transition-opacity hover:opacity-80"
+            >
+              {nextLabel}
+            </button>
+          </div>
         </div>
 
         <div className="bg-(--card) p-4 sm:p-0 rounded-lg h-fit flex flex-col gap-1 ">

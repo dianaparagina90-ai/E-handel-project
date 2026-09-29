@@ -4,8 +4,10 @@ import { customerInfoSchema, type CustomerInfo } from "../schemas/checkout";
 
 function CustomerInfoForm({
   onNext,
+  defaultValues,
 }: {
   onNext: (data: CustomerInfo) => void;
+  defaultValues?: CustomerInfo | null;
 }) {
   const {
     register,
@@ -13,10 +15,15 @@ function CustomerInfoForm({
     formState: { errors },
   } = useForm<CustomerInfo>({
     resolver: zodResolver(customerInfoSchema),
+    defaultValues: defaultValues ?? undefined,
   });
 
   return (
-    <form onSubmit={handleSubmit(onNext)} className="flex flex-col gap-4">
+    <form
+      id="checkout-form"
+      onSubmit={handleSubmit(onNext)}
+      className="flex flex-col gap-4"
+    >
       <div>
         <label className="text-xs uppercase">Fullständigt namn</label>
         <input {...register("name")} className="w-full border p-2" />
@@ -31,12 +38,6 @@ function CustomerInfoForm({
           <p className="text-red-950 text-sm">{errors.address.message}</p>
         )}
       </div>
-      <button
-        type="submit"
-        className="bg-(--primary) text-(--primary-foreground) py-2"
-      >
-        Nästa: Leverans →
-      </button>
     </form>
   );
 }

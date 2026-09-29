@@ -2,17 +2,28 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { paymentSchema, type Payment } from "../schemas/checkout";
 
-function PaymentForm({ onNext }: { onNext: (data: Payment) => void }) {
+function PaymentForm({
+  onNext,
+  defaultValues,
+}: {
+  onNext: (data: Payment) => void;
+  defaultValues?: Payment | null;
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Payment>({
     resolver: zodResolver(paymentSchema),
+    defaultValues: defaultValues ?? undefined,
   });
 
   return (
-    <form onSubmit={handleSubmit(onNext)} className="flex flex-col gap-4">
+    <form
+      id="checkout-form"
+      onSubmit={handleSubmit(onNext)}
+      className="flex flex-col gap-4"
+    >
       <div className="flex flex-col gap-2">
         <label className="flex items-center gap-2">
           <input type="radio" value="kort" {...register("method")} />
@@ -30,13 +41,6 @@ function PaymentForm({ onNext }: { onNext: (data: Payment) => void }) {
           <p className="text-red-950 text-sm">{errors.method.message}</p>
         )}
       </div>
-
-      <button
-        type="submit"
-        className="bg-(--primary) text-(--primary-foreground) py-2"
-      >
-        Nästa
-      </button>
     </form>
   );
 }
