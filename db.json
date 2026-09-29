@@ -103,19 +103,19 @@
 "categories" :[
   {
     "id": 1,
-    "name": "HÅRPRODUKTER"
+    "name": "Hårprodukter"
   },
   {
     "id": 2,
-    "name": "KLÄDER"
+    "name": "Kläder"
   },
   {
     "id": 3,
-    "name": "SMINK"
+    "name": "Smink"
   },
   {
     "id": 4,
-    "name": "UNDERKLÄDER"
+    "name": "Underkläder"
   }
 ],
 "orders": []
