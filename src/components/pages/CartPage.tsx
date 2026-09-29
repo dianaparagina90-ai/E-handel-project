@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import { useProducts } from "../../hooks/useProducts";
-import { useCategories } from "../../hooks/useCategories";
+
+import CartItem from "./CartItem";
 
 function CartPage() {
   const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } =
     useCart();
 
   const { data: products, isLoading } = useProducts();
-  const { data: categories } = useCategories();
 
   const navigate = useNavigate();
 
@@ -64,71 +64,15 @@ function CartPage() {
               if (!product) return null;
 
               return (
-                <div
+                <CartItem
                   key={product.id}
-                  className="flex gap-5 py-6"
-                  style={{ borderBottom: "1px solid var(--border)" }}
-                >
-                  <div
-                    className="w-20 h-28 overflow-hidden shrink-0"
-                    style={{ background: "var(--muted)" }}
-                  >
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p
-                      className="text-[10px] tracking-widest uppercase mb-1"
-                      style={{ color: "var(--accent)" }}
-                    >
-                      {
-                        categories?.find(
-                          (c) => c.id === String(product.categoryId),
-                        )?.name
-                      }
-                    </p>
-                    <h3 className="font-display text-base font-medium mb-3">
-                      {product.name}
-                    </h3>
-
-                    <div className="flex items-center gap-4">
-                      <div
-                        className="flex items-center text-sm"
-                        style={{ border: "1px solid var(--border)" }}
-                      >
-                        <button
-                          className="w-8 h-8 flex items-center justify-center transition-opacity hover:opacity-50"
-                          onClick={() => decreaseQuantity(product.id)}
-                        >
-                          -
-                        </button>
-                        <span className="w-8 text-center">
-                          {carItem.quantity}
-                        </span>
-                        <button
-                          className="w-8 h-8 flex items-center justify-center transition-opacity hover:opacity-50"
-                          onClick={() => increaseQuantity(product.id)}
-                        >
-                          +
-                        </button>
-                      </div>
-                      <button
-                        className="text-[10px] tracking-widest uppercase transition-opacity hover:opacity-50"
-                        style={{ color: "var(--muted-foreground)" }}
-                        onClick={() => removeFromCart(product.id)}
-                      >
-                        Ta bort
-                      </button>
-                    </div>
-                  </div>
-                  <div className="text-sm self-start pt-0.5">
-                    {(product.price * carItem.quantity).toLocaleString("sv-SE")}{" "}
-                    kr
-                  </div>
-                </div>
+                  product={product}
+                  quantity={carItem.quantity}
+                  editable={true}
+                  onIncrease={() => increaseQuantity(product.id)}
+                  onDecrease={() => decreaseQuantity(product.id)}
+                  onRemove={() => removeFromCart(product.id)}
+                />
               );
             })}
           </div>
