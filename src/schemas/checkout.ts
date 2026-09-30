@@ -1,7 +1,15 @@
 import { z } from "zod";
 
 export const customerInfoSchema = z.object({
-  name: z.string().min(2, "Ange ditt fullständiga namn"),
+  name: z
+    .string()
+    .min(2, "Ange ditt fullständiga namn")
+    .regex(/^[a-zA-ZåäöÅÄÖ\s-]+$/, "Namnet får bara innehålla bokstäver"),
+  email: z.string().email("Ange en giltig e-postadress"),
+  phone: z
+    .string()
+    .min(7, "Ange ett giltigt mobilnummer")
+    .regex(/^[\d\s+-]+$/, "Endast siffror och +/- tillåtna"),
   address: z.string().min(5, "Ange en giltig adress"),
 });
 
