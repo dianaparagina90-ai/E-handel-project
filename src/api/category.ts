@@ -11,7 +11,7 @@ export async function fetchCategories(): Promise<Category[]> {
 }
 
 export async function fetchSingleCategory(id: number): Promise<Category> {
-  const res = await fetch(`${API_URL}/category/${id}`);
+  const res = await fetch(`${API_URL}/categories/${id}`);
   if (!res.ok) {
     throw new Error("Kunde inte hämta kategorier");
   }
