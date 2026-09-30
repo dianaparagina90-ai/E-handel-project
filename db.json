@@ -115,38 +115,6 @@
       "name": "Underkläder"
     }
   ],
-  "orders": [
-    {
-      "id": "2MSatao3Fw8",
-      "items": [
-        {
-          "productId": "1",
-          "name": "Silkeshår Schampoo",
-          "price": 345,
-          "quantity": 1
-        },
-        {
-          "productId": "2",
-          "name": "Djupvårdande Hårmask",
-          "price": 289,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 634,
-      "customerDetails": "{\"name\":\"dsa\",\"address\":\"dwagre\"}",
-      "shippingMethod": "schenker",
-      "paymentMethod": "swish",
-      "orderDate": "2026-09-29T11:30:29.035Z"
-    },
-    {
-      "id": "xrp-23rsCNc",
-      "items": [],
-      "totalAmount": 0,
-      "customerDetails": "{\"name\":\"dsafe\",\"address\":\"feasdwads\"}",
-      "shippingMethod": "postnord",
-      "paymentMethod": "swish",
-      "orderDate": "2026-09-29T11:42:23.850Z"
-    }
-  ],
+  "orders": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
