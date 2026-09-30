@@ -1,10 +1,20 @@
 import { Link } from 'react-router-dom'
-import cartIcon from "../assets/cartIcon.png";
+import { FiShoppingCart } from "react-icons/fi";
 import Logo from '../Logo';
+import { useCart } from '../hooks/useCart';
 
 function Header () {
+
+    const { cartItems } = useCart();
+
+    const totalQuantity = cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
+
+
     return (
-        <header>
+        <header className="sticky top-0 z-50">
         
         <div>
 
@@ -17,12 +27,16 @@ function Header () {
 
             <Logo />
             
-            <div>
+            <div className='relative'>
                 <Link to="/Cart" aria-label="Öppna kundvagn">
-                <img
-                src={cartIcon}
-                alt="Kundvagn"
-                className="w-10 h-10 object-contain"/>
+                <FiShoppingCart className="w-8 h-8"/>
+
+                {totalQuantity >= 1 && (
+                    <span data-testid="cart-badge" className="absolute -top-2 -right-2 bg-[#c4607a] text-white
+                    text-xs rounded-full min-w-5 h-5 flex items-center justify-center">
+                        {totalQuantity}
+                    </span>
+                )}
                 </Link>
             </div>
 
