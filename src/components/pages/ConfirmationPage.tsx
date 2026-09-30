@@ -35,8 +35,12 @@ function ConfirmationPage() {
         Ditt paket är på väg till dig inom 3 - 5 arbetsdagar.
       </p>
       <div className="flex flex-col gap-2 p-4 border border-(--muted-foreground)">
-        {isPending && <p>Betalning pågår</p>}
-        {isError && <p>Betalningen gick inte genom. Vänligen försök igen</p>}
+        {isPending && <p className="font-bold">Ordern skapas...</p>}
+        {isError && (
+          <p className="text-red-600 font-display text-2xl">
+            Betalningen gick inte genom. Vänligen försök igen
+          </p>
+        )}
         {isSuccess &&
           (() => {
             const customer = JSON.parse(order.customerDetails);
@@ -65,11 +69,12 @@ function ConfirmationPage() {
                   {order.items.map((item) => (
                     <div
                       key={item.productId}
-                      className="flex gap-3 justify-between items-center"
+                      className="grid grid-cols-[1fr_auto_auto] gap-4 p-2 ml-2"
                     >
                       <p className="italic wrap-break-word">{item.name}</p>
-                      <p>{item.price} kr</p>
+
                       <p>{item.quantity} st</p>
+                      <p>{item.price} kr</p>
                     </div>
                   ))}
                 </div>
