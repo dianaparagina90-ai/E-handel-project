@@ -7,6 +7,7 @@ interface ICartContextType {
   increaseQuantity: (productId: number) => void;
   decreaseQuantity: (productId: number) => void;
   removeFromCart: (productId: number) => void;
+  clearCart: () => void;
 }
 
 export const CartItemContext = createContext<ICartContextType | null>(null);
@@ -60,6 +61,12 @@ const CartItemProvider = ({ children }: PropsWithChildren) => {
       items.filter((item) => item.productId !== productId),
     );
   };
+
+  //Töm kundvagnen
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   return (
     <CartItemContext.Provider
       value={{
@@ -68,6 +75,7 @@ const CartItemProvider = ({ children }: PropsWithChildren) => {
         increaseQuantity,
         decreaseQuantity,
         removeFromCart,
+        clearCart,
       }}
     >
       {children}
