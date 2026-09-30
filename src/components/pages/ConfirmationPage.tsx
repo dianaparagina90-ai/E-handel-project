@@ -11,6 +11,8 @@ function ConfirmationPage() {
   const { data: order, isPending, isError, isSuccess } = useOrder(id ?? "");
   const hasClearedCart = useRef(false);
 
+  const customer = order ? JSON.parse(order.customerDetails) : null;
+
   //Töma kundvagnen när ordern är framgångsrik och har inte redan tömt kundvagnen
   useEffect(() => {
     if (isSuccess && order && !hasClearedCart.current) {
@@ -29,7 +31,7 @@ function ConfirmationPage() {
         <FaRegHeart className="ml-2 text-2xl" />
       </div>
       <p className="tracking-tight ">
-        En bekräftelse har skickats till din e-postadress.
+        En bekräftelse har skickats till {customer?.email}.
       </p>
       <p className="tracking-tight">
         Ditt paket är på väg till dig inom 3 - 5 arbetsdagar.
@@ -43,7 +45,6 @@ function ConfirmationPage() {
         )}
         {isSuccess &&
           (() => {
-            const customer = JSON.parse(order.customerDetails);
             return (
               <div className="flex flex-col gap-4 grow divide-y divide-(--muted-foreground) m-2 p-2">
                 <div className="grid grid-cols-2 gap-2 items-center">
@@ -88,6 +89,10 @@ function ConfirmationPage() {
                     <p className="font-display">
                       Adress:
                       <span className="font-sans ml-2">{customer.address}</span>
+                    </p>
+                    <p className="font-display">
+                      Telefon:
+                      <span className="font-sans ml-2">{customer.phone}</span>
                     </p>
                   </div>
                 </div>
