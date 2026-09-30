@@ -48,6 +48,9 @@ function CheckoutPage() {
     0,
   );
 
+  const shippingCost = subtotal >= 699 ? 0 : 59;
+  const total = subtotal + shippingCost;
+
   const nextLabel = {
     1: "Nästa: Leverans →",
     2: "Nästa: Betalning →",
@@ -60,7 +63,7 @@ function CheckoutPage() {
     const order: Order = {
       id: 0,
       items: orderItems,
-      totalAmount: subtotal,
+      totalAmount: total,
       customerDetails: JSON.stringify(customerInfo),
       shippingMethod: shipping.method,
       paymentMethod: paymentData.method,
@@ -147,8 +150,8 @@ function CheckoutPage() {
           </div>
         </div>
 
-        <div className="bg-(--card) p-4 sm:p-0 rounded-lg h-fit flex flex-col gap-1 ">
-          <h2 className="font-display text-xl mb-4">Din order</h2>
+        <div className="bg-(--secondary) border border-(--border) p-6 h-fit flex flex-col gap-1 ">
+          <h2 className="font-display text-xl font-medium mb-5">Din order</h2>
           {/*rendering om listan med produkter*/}
           <div className="sm:flex sm:flex-col sm: gap-2">
             {cartItems.map((cartItem) => {
@@ -170,7 +173,24 @@ function CheckoutPage() {
               );
             })}
           </div>
-          {/*Byggas vidare med totalen och allt annat som behövs*/}
+          <div className="m-4 pt-4 flex flex-col gap-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-(--muted-foreground)">Delsumma</span>
+              <span>{subtotal.toLocaleString("sv-SE")} kr</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-(--muted-foreground)">Frakt</span>
+              <span className="text-xs text-(--accent)">
+                {shippingCost === 0
+                  ? "Gratis ✓"
+                  : `${(699 - subtotal).toLocaleString("sv-SE")} kr kvar till gratis frakt`}
+              </span>
+            </div>
+            <div className="flex justify-between font-medium pt-2">
+              <span>Totalt</span>
+              <span>{total.toLocaleString("sv-SE")} kr</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
