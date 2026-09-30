@@ -1,76 +1,57 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 
 import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
-import CartItemProvider from "../components/context/CartItemContext";
 import Header from "../components/Header";
-import { useCart } from "../hooks/useCart";
 
-// Skapar en test component för att kunna lägga till produkter i kundvagnen
-// och testa att Header visar rätt antal i badgen.
-const TestComponent = () => {
-    const { addToCart } = useCart();
+let mockCartItems: { productId: number; quantity: number }[] = [];
 
-    return (
-        <button onClick={() => addToCart(1)}>
-            Add
-        </button>
-    );
-};
+vi.mock("../hooks/useCart", () => ({
+    useCart: () => ({
+        cartItems: mockCartItems,
+    }),
+}));
 
 describe("Header", () => {
     afterEach(() => {
         cleanup();
+        mockCartItems = [];
     });
 
     // Testar att badgen inte visas när kundvagnen är tom
     it("does not show cart badge when cart is empty", () => {
         render(
             <BrowserRouter>
-                <CartItemProvider>
-                    <Header />
-                </CartItemProvider>
+                <Header />
             </BrowserRouter>
         );
 
         expect(screen.queryByTestId("cart-badge")).not.toBeInTheDocument();
     });
 
-    // Testar att badgen visar 1 när en produkt läggs i kundvagnen
-    it("shows cart badge with quantity 1", async () => {
-        const user = userEvent.setup();
+    // Testar att badgen visar rätt antal produkter
+    it("shows cart badge with quantity 1", () => {
+        mockCartItems = [{ productId: 1, quantity: 1 }];
 
         render(
             <BrowserRouter>
-                <CartItemProvider>
-                    <Header />
-                    <TestComponent />
-                </CartItemProvider>
+                <Header />
             </BrowserRouter>
         );
-
-        await user.click(screen.getByRole("button", { name: "Add" }));
 
         expect(screen.getByTestId("cart-badge")).toHaveTextContent("1");
     });
 
-    // Testar att badgen uppdateras när samma produkt läggs till flera gånger
-    it("shows cart badge with quantity 2", async () => {
-        const user = userEvent.setup();
+    // Testar att badgen visar rätt antal produkter
+    it("shows cart badge with quantity 2", () => {
+        mockCartItems = [{ productId: 1, quantity: 2 }];
 
         render(
             <BrowserRouter>
-                <CartItemProvider>
-                    <Header />
-                    <TestComponent />
-                </CartItemProvider>
+                <Header />
             </BrowserRouter>
         );
-
-        await user.click(screen.getByRole("button", { name: "Add" }));
-        await user.click(screen.getByRole("button", { name: "Add" }));
 
         expect(screen.getByTestId("cart-badge")).toHaveTextContent("2");
     });
