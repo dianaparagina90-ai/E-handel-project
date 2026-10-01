@@ -18,6 +18,9 @@ Bygga en e-handelsapplikation med React och TypeScript.
 
 - Varje huvuddel har fått tydliga beskrivningar och deluppgifter.
 - Tickets för Header och Footer har också skapats.
+- Bestäm om bilder, exempelvis logotypen, ska hämtas från `public` eller `assets`.
+- Bestäm om Cart Page ska vara en modal eller en egen sida.
+- Bestäm vilken data som ska finnas i Context.
 
 ## Kvar att göra
 
@@ -30,7 +33,7 @@ Bygga en e-handelsapplikation med React och TypeScript.
 
 
 ## Att göra sen
+-kolla VG uppgifterna vad kan vi göra mer
+-skapa ny branch för VG kraven så att inte förstora main
 
-- Bestäm om bilder, exempelvis logotypen, ska hämtas från `public` eller `assets`.
-- Bestäm om Cart Page ska vara en modal eller en egen sida.
-- Bestäm vilken data som ska finnas i Context.
+
