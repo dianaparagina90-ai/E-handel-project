@@ -6,15 +6,17 @@
       "price": 345,
       "categoryId": 1,
       "image": "https://images.unsplash.com/photo-1686121544103-f1bc403bd6da?w=600&h=750&fit=crop&auto=format",
-      "description": "Lyxig schampoo med argan- och jojobaolja. Återfuktar och ger silkeslen glans utan att tynga ner."
+      "description": "Lyxig schampoo med argan- och jojobaolja. Återfuktar och ger silkeslen glans utan att tynga ner.",
+      "onSale": "false"
     },
     {
       "id": "2",
       "name": "Djupvårdande Hårmask",
       "price": 289,
-      "categoryId": 1,
+      "categoryId": [1,5],
       "image": "https://images.unsplash.com/photo-1646109324106-2427a6341f55?w=600&h=750&fit=crop&auto=format",
-      "description": "Intensiv hårmask med keratin och rosolja. Lämna i 10 minuter för mjukt och glansigt hår."
+      "description": "Intensiv hårmask med keratin och rosolja. Lämna i 10 minuter för mjukt och glansigt hår.",
+      "onSale": "true"
     },
     {
       "id": "3",
@@ -22,7 +24,8 @@
       "price": 219,
       "categoryId": 1,
       "image": "https://images.unsplash.com/photo-1747098393451-6b985f62a2c2?w=600&h=750&fit=crop&auto=format",
-      "description": "Skyddar mot värme upp till 230°C. Ger spegelblankt resultat och minskar frizz."
+      "description": "Skyddar mot värme upp till 230°C. Ger spegelblankt resultat och minskar frizz.",
+      "onSale": "false"
     },
     {
       "id": "4",
@@ -30,15 +33,17 @@
       "price": 1490,
       "categoryId": 2,
       "image": "https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?w=600&h=750&fit=crop&auto=format",
-      "description": "Handmålad kimono i 100% naturligt siden. Lös passform med vida ärmar och skärp."
+      "description": "Handmålad kimono i 100% naturligt siden. Lös passform med vida ärmar och skärp.",
+      "onSale": "false"
     },
     {
       "id": "5",
       "name": "Ribbad Midi-klänning",
       "price": 890,
-      "categoryId": 2,
+      "categoryId": [2,5],
       "image": "https://images.unsplash.com/photo-1603400521630-9f2de124b33b?w=600&h=750&fit=crop&auto=format",
-      "description": "Mjukt ribbat jersey i ekologisk bomull. Smickrande midi-längd med djup urringning."
+      "description": "Mjukt ribbat jersey i ekologisk bomull. Smickrande midi-längd med djup urringning.",
+      "onSale": "true"
     },
     {
       "id": "6",
@@ -46,15 +51,17 @@
       "price": 750,
       "categoryId": 2,
       "image": "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=600&h=750&fit=crop&auto=format",
-      "description": "Omlottklänning i viskose med handtryckt blomstermönster. Justerbara knytsömmar."
+      "description": "Omlottklänning i viskose med handtryckt blomstermönster. Justerbara knytsömmar.",
+      "onSale": "false"
     },
     {
       "id": "7",
       "name": "Velvet Läppstift",
       "price": 195,
-      "categoryId": 3,
+      "categoryId": [3,5],
       "image": "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&h=750&fit=crop&auto=format",
-      "description": "Krämigt läppstift med velvet-finish. Lång hållbarhet och intensiv pigmentering. Veganskt."
+      "description": "Krämigt läppstift med velvet-finish. Lång hållbarhet och intensiv pigmentering. Veganskt.",
+      "onSale": "true"
     },
     {
       "id": "8",
@@ -62,7 +69,8 @@
       "price": 349,
       "categoryId": 3,
       "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=750&fit=crop&auto=format",
-      "description": "Fyra highlighter-nyanser från champagne till roséguld. Buildbar täckning, vegansk formel."
+      "description": "Fyra highlighter-nyanser från champagne till roséguld. Buildbar täckning, vegansk formel.",
+      "onSale": "false"
     },
     {
       "id": "9",
@@ -70,7 +78,8 @@
       "price": 425,
       "categoryId": 3,
       "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&h=750&fit=crop&auto=format",
-      "description": "Lätt foundation med SPF 30. Jämnar ut hudtonen och ger en naturlig, hudlik finish."
+      "description": "Lätt foundation med SPF 30. Jämnar ut hudtonen och ger en naturlig, hudlik finish.",
+      "onSale": "false"
     },
     {
       "id": "10",
@@ -78,7 +87,8 @@
       "price": 490,
       "categoryId": 4,
       "image": "https://images.unsplash.com/photo-1594631407335-389350e00784?w=600&h=750&fit=crop&auto=format",
-      "description": "Fransk spets i delikat blomstermönster. Mjuk vadderade kupor och justerbara band."
+      "description": "Fransk spets i delikat blomstermönster. Mjuk vadderade kupor och justerbara band.",
+      "onSale": "false"
     },
     {
       "id": "11",
@@ -86,7 +96,8 @@
       "price": 695,
       "categoryId": 4,
       "image": "https://images.unsplash.com/photo-1494354205675-139c8101dfa5?w=600&h=750&fit=crop&auto=format",
-      "description": "Matchande set i 100% siden. Inkluderar bralette och midi-slip. Handtvätt rekommenderas."
+      "description": "Matchande set i 100% siden. Inkluderar bralette och midi-slip. Handtvätt rekommenderas.",
+      "onSale": "false"
     },
     {
       "id": "12",
@@ -94,7 +105,9 @@
       "price": 545,
       "categoryId": 4,
       "image": "https://images.unsplash.com/photo-1664158162601-79d988a17334?w=600&h=750&fit=crop&auto=format",
-      "description": "Mjukt natlinne i modal och siden-mix. A-line passform med spetsdetaljer i urringning."
+      "description": "Mjukt natlinne i modal och siden-mix. A-line passform med spetsdetaljer i urringning.",
+      "onSale": "false"
+
     }
   ],
   "categories": [
@@ -113,8 +126,13 @@
     {
       "id": "4",
       "name": "Underkläder"
+    },
+     {
+      "id": "5",
+      "name": "Rea"
     }
+
   ],
-  "orders": [],
-  "$schema": "./node_modules/json-server/schema.json"
+  "orders": []
+
 }
