@@ -1,5 +1,6 @@
 import { useCategories } from "../../hooks/useCategories";
 import type { CartItemProps } from "../../types/types";
+import { isOnSale, getDisplayPrice } from "../../utils/helpers";
 
 const CartItem = ({
   product,
@@ -9,8 +10,11 @@ const CartItem = ({
   onDecrease,
   onRemove,
 }: CartItemProps) => {
-  const totalPrice = product.price * quantity;
   const { data: categories } = useCategories();
+
+  const onSale = isOnSale(product);
+  const displayPrice = getDisplayPrice(product);
+  const totalPrice = displayPrice * quantity;
 
   return (
     <div
@@ -37,12 +41,25 @@ const CartItem = ({
         <h3 className="font-display text-base font-medium mb-3">
           {product.name}
         </h3>
-        <p
-          className="text-sm mb-3"
-          style={{ color: "var(--muted-foreground)" }}
-        >
-          {product.price.toLocaleString("sv-SE")} kr
-        </p>
+        <div className="flex items-center gap-2 mb-3">
+          {onSale ? (
+            <>
+              <span className="text-sm" style={{ color: "var(--accent)" }}>
+                {displayPrice.toLocaleString("sv-SE")} kr
+              </span>
+              <span
+                className="text-sm line-through"
+                style={{ color: "var(--muted-foreground)" }}
+              >
+                {product.price.toLocaleString("sv-SE")} kr
+              </span>
+            </>
+          ) : (
+            <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
+              {product.price.toLocaleString("sv-SE")} kr
+            </p>
+          )}
+        </div>
       </div>
 
       {editable ? (
