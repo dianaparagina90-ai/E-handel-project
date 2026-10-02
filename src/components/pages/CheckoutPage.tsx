@@ -75,7 +75,7 @@ function CheckoutPage() {
     createOrder(order, {
       onSuccess: (data) => {
         console.log("Skapad order: ", data);
-        navigate("/Confirmation");
+        navigate(`/Confirmation/${data.id}`);
       },
       onError: (error) => {
         console.error("ORDER MISSLYCKADES:", error);
