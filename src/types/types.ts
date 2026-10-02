@@ -25,13 +25,19 @@ export type CartItem = {
 
 export interface Order {
   id: number;
-  items: CartItem[];
+  items: OrderItem[];
   totalAmount: number;
   customerDetails: string;
   shippingMethod: string;
   paymentMethod: string;
   orderDate: string;
 }
+export type OrderItem = {
+  productId: number;
+  name: string;
+  price: number;
+  quantity: number;
+};
 
 export interface CartItemProps {
   product: Product;

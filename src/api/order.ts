@@ -17,3 +17,14 @@ export const createOrder = async (order: Order): Promise<Order> => {
 
   return response.json();
 };
+
+export const getOrder = async (id:string): Promise<Order> => {
+  const response = await fetch(`${API_URL}/orders/${id}`)
+  if (!response.ok) {
+    throw new Error("Kunde inte hämta ordern")
+  }
+
+  return response.json()
+
+}
+
