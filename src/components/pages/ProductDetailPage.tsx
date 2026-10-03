@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
 import { useCart } from "../../hooks/useCart";
+import { isOnSale, getDisplayPrice } from "../../utils/helpers";
 
 function ProductDetailPage() {
   const { id } = useParams();
@@ -23,22 +24,24 @@ function ProductDetailPage() {
     return <p>Ingen produkt hittades.</p>;
   }
 
+  const onSale = isOnSale(product.data.product);
+  const displayPrice = getDisplayPrice(product.data.product);
+
   return (
-    
     <div className="max-w-5xl mx-auto px-6 py-12">
       {/* HELA PRODUKTDETALJSIDAN */}
 
-      <button className="py-2 text-xs mb-6 cursor-default transition-colors hover:text-[#c4607a]"
-        onClick={() => navigate(-1)}>
-        &lt; TILLBAKA 
+      <button
+        className="py-2 text-xs mb-6 cursor-default transition-colors hover:text-[#c4607a]"
+        onClick={() => navigate(-1)}
+      >
+        &lt; TILLBAKA
       </button>
 
       {/* LAYOUT: BILDER + PRODUKTINFO */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-
         {/* BILDSEKTION */}
         <div className="flex flex-col gap-y-6">
-
           {/* STOR PRODUKTBILD */}
           <img
             src={product.data.product.image}
@@ -70,31 +73,46 @@ function ProductDetailPage() {
 
         {/* PRODUKTINFORMATION */}
         <div className="flex flex-col justify-center gap-4">
-
           <p className="text-[#c4607a]">
-            {product.data.category.name}</p>
+            {product.data.categories.map((c) => c.name).join(", ")}
+          </p>
 
           <h1 className="font-display text-3xl font-medium ">
-            {product.data.product.name}</h1>
+            {product.data.product.name}
+          </h1>
 
-          <p className="text-[#c4607a] py-5 font-small">
-            {product.data.product.price} kr</p>
+          <div className="flex items-center gap-3 py-5">
+            {onSale ? (
+              <>
+                <span className="text-[#c4607a] font-medium">
+                  {displayPrice.toLocaleString("sv-SE")} kr
+                </span>
+                <span className="text-(--muted-foreground) line-through text-sm">
+                  {product.data.product.price.toLocaleString("sv-SE")} kr
+                </span>
+              </>
+            ) : (
+              <span className="text-[#c4607a]">
+                {product.data.product.price.toLocaleString("sv-SE")} kr
+              </span>
+            )}
+          </div>
 
           <p className="font-base gap-4 text-sm leading-relaxed">
-            {product.data.product.description}</p>
+            {product.data.product.description}
+          </p>
 
           {/* KNAPP */}
           <div className="pt-4">
-            <button className="w-full px-8 py-4 bg-[#c4607a] text-white font-base"
-            onClick={() => {
-              addToCart(product.data.product.id);
-            }}
-          >
-            LÄGG I VARUKORG
-          </button>
+            <button
+              className="w-full px-8 py-4 bg-[#c4607a] text-white font-base"
+              onClick={() => {
+                addToCart(product.data.product.id);
+              }}
+            >
+              LÄGG I VARUKORG
+            </button>
           </div>
-
-          
         </div>
       </div>
     </div>
