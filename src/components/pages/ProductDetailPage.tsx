@@ -85,7 +85,10 @@ function ProductDetailPage() {
 
           {/* KNAPP */}
           <div className="pt-4">
-            <button className="w-full px-8 py-4 bg-[#c4607a] text-white font-base"
+
+            <button className="w-full px-8 py-4 bg-[#c4607a] 
+            text-white font-base
+            hover:opacity-90 transition-opacity"
             onClick={() => {
               addToCart(product.data.product.id);
             }}
