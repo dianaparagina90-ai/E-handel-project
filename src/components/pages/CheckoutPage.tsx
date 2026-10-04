@@ -13,6 +13,7 @@ import StepLabel from "@mui/material/StepLabel";
 import { useCreateOrder } from "../../hooks/useCreateOrder";
 import type { Order } from "../../types/types";
 import { useNavigate } from "react-router-dom";
+import { getDisplayPrice } from "../../utils/helpers";
 
 type CheckoutStep = 1 | 2 | 3;
 
@@ -37,7 +38,7 @@ function CheckoutPage() {
       {
         productId: item.productId,
         name: product.name,
-        price: product.price,
+        price: getDisplayPrice(product),
         quantity: item.quantity,
       },
     ];
@@ -75,7 +76,7 @@ function CheckoutPage() {
     createOrder(order, {
       onSuccess: (data) => {
         console.log("Skapad order: ", data);
-        navigate("/Confirmation");
+        navigate(`/Confirmation/${data.id}`);
       },
       onError: (error) => {
         console.error("ORDER MISSLYCKADES:", error);

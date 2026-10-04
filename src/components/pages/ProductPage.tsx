@@ -3,6 +3,7 @@ import { useCategories } from "../../hooks/useCategories";
 import { useProducts } from "../../hooks/useProducts";
 import ProductCard from "../ProductCard";
 import CategoryFilter from "../CategoryFilter";
+import { getCategoryIds } from "../../utils/helpers";
 
 function ProductPage() {
   const { data: products, isLoading, isError, error } = useProducts();
@@ -10,7 +11,11 @@ function ProductPage() {
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const filteredProducts = selectedCategory
-    ? products?.filter((p) => String(p.categoryId) === selectedCategory)
+    ? products?.filter((p) =>
+        getCategoryIds(p.categoryId).some(
+          (id) => String(id) === selectedCategory,
+        ),
+      )
     : products;
   const selectedCategoryName = selectedCategory
     ? categories?.find((c) => c.id === selectedCategory)?.name
@@ -59,8 +64,9 @@ function ProductPage() {
               key={product.id}
               product={product}
               categoryName={
-                categories?.find((c) => c.id === String(product.categoryId))
-                  ?.name
+                categories?.find((c) =>
+                  getCategoryIds(product.categoryId).includes(Number(c.id)),
+                )?.name
               }
             />
           ))}

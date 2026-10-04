@@ -1,27 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ProductWithCategory } from "../types/types";
 import { fetchSingleProduct } from "../api/products";
-import { fetchSingleCategory } from "../api/category";
-
+import { fetchCategories } from "../api/category";
+import { getCategoryIds } from "../utils/helpers";
 
 export const useProduct = (id: number) => {
+  const query = useQuery<ProductWithCategory>({
+    queryKey: ["product", id],
 
-    const query = useQuery<ProductWithCategory>({
-        queryKey: ["product", id],
+    queryFn: async () => {
+      const product = await fetchSingleProduct(id);
+      const categories = await fetchCategories();
 
-        queryFn: async () => {
-            
-            const product = await fetchSingleProduct(id);
+      const matchedCategories = categories.filter((c) =>
+        getCategoryIds(product.categoryId).includes(Number(c.id)),
+      );
 
-            const category = await fetchSingleCategory (product.categoryId);
+      return {
+        product,
+        categories: matchedCategories,
+      };
+    },
+  });
 
-                return {
-                    product,
-                    category
-            };
-        },
-    });
-
-    return query;
-
+  return query;
 };

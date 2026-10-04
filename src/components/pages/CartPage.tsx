@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import { useProducts } from "../../hooks/useProducts";
+import { getDisplayPrice } from "../../utils/helpers";
 
 import CartItem from "./CartItem";
 
@@ -47,7 +48,7 @@ function CartPage() {
 
     if (!product) return total;
 
-    return total + product.price * cartItem.quantity;
+    return total + getDisplayPrice(product) * cartItem.quantity;
   }, 0);
 
   return (
