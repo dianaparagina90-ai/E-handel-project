@@ -67,7 +67,7 @@ describe("CartItemContext functions", () => {
     expect(screen.getByTestId("quantity")).toHaveTextContent("2");
   });
 
-  it("decrease quantity", async () => {
+  it("adds the same product twice and decreases its quantity", async () => {
     //Arrange
     const user = userEvent.setup();
 
@@ -100,5 +100,23 @@ describe("CartItemContext functions", () => {
 
     //Assert
     expect(screen.getByTestId("quantity")).toHaveTextContent("0");
+  });
+
+  it("does not add the same product as a separate cart item", async () => {
+    //Arrange
+    const user = userEvent.setup();
+
+    //Act
+    render(
+      <CartItemProvider>
+        <TestComponent />
+      </CartItemProvider>,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Add" }));
+    await user.click(screen.getByRole("button", { name: "Add" }));
+
+    //Assert
+    expect(screen.getByTestId("quantity")).toHaveTextContent("2");
   });
 });
