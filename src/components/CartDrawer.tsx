@@ -2,6 +2,7 @@ import { useCart } from "../hooks/useCart";
 import { useProducts } from "../hooks/useProducts";
 import { useNavigate } from "react-router-dom";
 import CartItem from "./pages/CartItem";
+import { getDisplayPrice } from "../utils/helpers";
 
 
 type CartDrawerProps = {
@@ -24,12 +25,13 @@ function CartDrawer({ onClose }: CartDrawerProps) {
 
         if (!product) return total;
 
-        return total + product.price * cartItem.quantity;
+        return total + getDisplayPrice(product) * cartItem.quantity;
     }, 0);
 
     return (
         <div className="w-full sm:w-96 p-6">
-            <div className="flex items-center justify-between pb-5 mb-5 border-b">
+            <div className="sticky top-0 z-10 flex items-center 
+            justify-between pb-5 mb-5 border-b bg-[#fdf8f6]">
                 <h2 className="font-display text-2xl font-medium">
                     Din varukorg
                 </h2>
@@ -54,9 +56,8 @@ function CartDrawer({ onClose }: CartDrawerProps) {
 
                 return(
 
-                <div className="mb-4"> 
+                <div key={product.id} className="mb-4"> 
                     <CartItem 
-                    key={product.id}
                     product={product}
                     quantity={cartItem.quantity}
                     editable={false}
