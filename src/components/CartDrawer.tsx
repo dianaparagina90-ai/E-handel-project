@@ -1,6 +1,8 @@
 import { useCart } from "../hooks/useCart";
 import { useProducts } from "../hooks/useProducts";
 import { useNavigate } from "react-router-dom";
+import CartItem from "./pages/CartItem";
+
 
 type CartDrawerProps = {
     onClose: () => void;
@@ -26,7 +28,7 @@ function CartDrawer({ onClose }: CartDrawerProps) {
     }, 0);
 
     return (
-        <div className="w-80 p-6">
+        <div className="w-full sm:w-96 p-6">
             <div className="flex items-center justify-between pb-5 mb-5 border-b">
                 <h2 className="font-display text-2xl font-medium">
                     Din varukorg
@@ -50,33 +52,19 @@ function CartDrawer({ onClose }: CartDrawerProps) {
                     return null;
                 }
 
-                return (
-                    <div
-                        key={product.id}
-                        className="flex gap-4 py-5 border-b"
-                    >
-                        <img
-                            className="w-20 h-24 object-cover"
-                            src={product.image}
-                            alt={product.name}
-                        />
+                return(
 
-                        <div>
-                            <div className="font-medium mb-1">
-                                {product.name}
-                            </div>
-
-                            <div className="text-sm">
-                                {product.price.toLocaleString("sv-SE")} kr
-                            </div>
-
-                            <div className="text-sm text-gray-500">
-                                Antal: {cartItem.quantity}
-                            </div>
-                        </div>
+                <div className="mb-4"> 
+                    <CartItem 
+                    key={product.id}
+                    product={product}
+                    quantity={cartItem.quantity}
+                    editable={false}
+                    />
                     </div>
                 );
             })}
+
 
             <div className="mt-5 pt-5 border-t flex items-center justify-between">
                 <span className="font-medium">Totalt</span>
