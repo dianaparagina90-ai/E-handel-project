@@ -3,8 +3,8 @@ import { createContext, useState, type PropsWithChildren } from "react";
 
 interface ICartContextType {
   cartItems: CartItem[];
-  addToCart: (productId: number) => void;
-  increaseQuantity: (productId: number) => void;
+  addToCart: (productId: number, stock: number) => void;
+  increaseQuantity: (productId: number, stock: number) => void;
   decreaseQuantity: (productId: number) => void;
   removeFromCart: (productId: number) => void;
   clearCart: () => void;
@@ -16,26 +16,28 @@ const CartItemProvider = ({ children }: PropsWithChildren) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   //Lägga produkt i kundvagnen
-  const addToCart = (productId: number) => {
+  const addToCart = (productId: number, stock: number) => {
     setCartItems((items) => {
       const existingItem = items.find((item) => item.productId === productId);
 
       if (existingItem) {
+        if (existingItem.quantity >= stock) return items;
         return items.map((item) =>
           item.productId === productId
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
       }
+      if (stock <= 0) return items;
       return [...items, { productId, quantity: 1 }];
     });
   };
 
   //Öka antal av samma produkt
-  const increaseQuantity = (productId: number) => {
+  const increaseQuantity = (productId: number, stock: number) => {
     setCartItems((items) =>
       items.map((item) =>
-        item.productId === productId
+        item.productId === productId && item.quantity < stock
           ? { ...item, quantity: item.quantity + 1 }
           : item,
       ),

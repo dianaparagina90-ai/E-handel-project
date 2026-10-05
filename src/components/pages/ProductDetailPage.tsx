@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
 import { useCart } from "../../hooks/useCart";
 import { isOnSale, getDisplayPrice } from "../../utils/helpers";
+import OutOfStock from "../OutOfStockBadge";
 
 function ProductDetailPage() {
   const { id } = useParams();
@@ -43,11 +44,13 @@ function ProductDetailPage() {
         {/* BILDSEKTION */}
         <div className="flex flex-col gap-y-6">
           {/* STOR PRODUKTBILD */}
-          <img
-            src={product.data.product.image}
-            alt={product.data.product.name}
-            className="w-full"
-          />
+          <OutOfStock product={product.data.product}>
+            <img
+              src={product.data.product.image}
+              alt={product.data.product.name}
+              className="w-full"
+            />
+          </OutOfStock>
 
           {/* SMÅ PRODUKTBILDER */}
           <div className="flex justify-start gap-3">
