@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useCategories } from "../../hooks/useCategories";
 import { useProducts } from "../../hooks/useProducts";
-import ProductCard from "../ProductCard";
-import CategoryFilter from "../CategoryFilter";
+import ProductCard from "../product/ProductCard";
+import CategoryFilter from "../product/CategoryFilter";
 import { getCategoryIds } from "../../utils/helpers";
 
 function ProductPage() {
