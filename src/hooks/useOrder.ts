@@ -7,6 +7,7 @@ export const useOrder = (id: string) => {
         queryKey : ["order", id],
         queryFn : ()=> getOrder(id),
         enabled: !!id,
+        throwOnError: true,
 
     })
 }
