@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.css";
 import CartItemProvider from "./components/context/CartItemContext";
+import ProductPageErrorBoundary from "./components/ProductPageErrorBoundary";
 
 const App = () => {
   return (
@@ -17,7 +18,14 @@ const App = () => {
 
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<ProductPage />} />
+            <Route 
+            path="/" 
+            element={
+              <ProductPageErrorBoundary>
+                <ProductPage />
+              </ProductPageErrorBoundary>
+              }
+            />
             <Route path="/ProductDetail/:id" element={<ProductDetailPage />} />
             <Route path="/Cart" element={<CartPage />} />
             <Route path="/Checkout" element={<CheckoutPage />} />
