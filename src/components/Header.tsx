@@ -1,9 +1,16 @@
-import { Link } from 'react-router-dom'
+import CartDrawer from "./CartDrawer";
+
 import { FiShoppingCart } from "react-icons/fi";
+import { useState } from "react";
 import Logo from '../Logo';
+
 import { useCart } from '../hooks/useCart';
+import { SwipeableDrawer } from '@mui/material';
+
 
 function Header () {
+
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     const { cartItems } = useCart();
 
@@ -14,6 +21,7 @@ function Header () {
 
 
     return (
+        <>
         <header className="sticky top-0 z-50">
         
         <div>
@@ -28,7 +36,10 @@ function Header () {
             <Logo />
             
             <div className='relative'>
-                <Link to="/Cart" aria-label="Öppna kundvagn">
+                <button 
+                aria-label="Öppna kundvagn"
+                onClick={() => setDrawerOpen(true)}>
+
                 <FiShoppingCart className="w-8 h-8"/>
 
                 {totalQuantity >= 1 && (
@@ -37,7 +48,7 @@ function Header () {
                         {totalQuantity}
                     </span>
                 )}
-                </Link>
+                </button>
             </div>
 
         </div>  
@@ -45,6 +56,16 @@ function Header () {
         </div>
         
         </header>
+
+        <SwipeableDrawer
+            anchor="right"
+            open={drawerOpen}
+            onClose={() => setDrawerOpen(false)}
+            onOpen={() => setDrawerOpen(true)}
+            >
+            <CartDrawer onClose={() => setDrawerOpen(false)}/>
+        </SwipeableDrawer>
+        </>
     )
 };
 

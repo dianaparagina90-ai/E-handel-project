@@ -11,6 +11,11 @@ vi.mock("../hooks/useCart", () => ({
     useCart: () => ({
         cartItems: mockCartItems,
     }),
+    
+}));
+
+vi.mock("../components/CartDrawer", () => ({
+    default: () => <div />,
 }));
 
 describe("Header", () => {
