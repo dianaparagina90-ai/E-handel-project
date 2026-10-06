@@ -1,4 +1,6 @@
+import { useCart } from "../hooks/useCart";
 import type { Product } from "../types/types";
+import isOutOfStock from "../utils/helpers";
 
 function OutOfStock({
   product,
@@ -7,7 +9,8 @@ function OutOfStock({
   product: Product;
   children: React.ReactNode;
 }) {
-  const outOfStock = product.stock === 0;
+  const { cartItems } = useCart();
+  const outOfStock = isOutOfStock(product, cartItems);
 
   return (
     <div className="relative">

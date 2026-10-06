@@ -110,10 +110,13 @@ function ProductDetailPage() {
             <button
               className="w-full px-8 py-4 bg-[#c4607a] text-white font-base"
               onClick={() => {
-                addToCart(product.data.product.id);
+                addToCart(product.data.product.id, product.data.product.stock);
               }}
+              disabled={product.data.product.stock === 0}
             >
-              LÄGG I VARUKORG
+              {product.data.product.stock === 0
+                ? "SLUT I LAGER"
+                : "LÄGG I VARUKORGEN"}
             </button>
           </div>
         </div>

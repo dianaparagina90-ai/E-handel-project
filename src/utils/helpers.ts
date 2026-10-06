@@ -1,4 +1,4 @@
-import type { Product } from "../types/types";
+import type { Product, CartItem } from "../types/types";
 
 // Kategorier
 export function getCategoryIds(categoryId: number | number[]): number[] {
@@ -16,3 +16,12 @@ export function getDisplayPrice(product: Product): number {
   if (!isOnSale(product)) return product.price;
   return Math.round(product.price * (1 - SALE_DISCOUNT_PERCENT / 100));
 }
+
+// Stock
+function isOutOfStock(product: Product, cartItems: CartItem[]): boolean {
+  const currentInCart =
+    cartItems.find((item) => item.productId === product.id)?.quantity ?? 0;
+  return currentInCart >= product.stock;
+}
+
+export default isOutOfStock;
