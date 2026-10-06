@@ -1,6 +1,6 @@
 import { useCategories } from "../../hooks/useCategories";
 import type { CartItemProps } from "../../types/types";
-import { isOnSale, getDisplayPrice } from "../../utils/helpers";
+import { isOnSale, getDisplayPrice, getCategoryIds } from "../../utils/helpers";
 
 const CartItem = ({
   product,
@@ -36,7 +36,11 @@ const CartItem = ({
           className="text-[10px] tracking-widest uppercase mb-1"
           style={{ color: "var(--accent)" }}
         >
-          {categories?.find((c) => c.id === String(product.categoryId))?.name}
+          {
+            categories?.find((c) =>
+              getCategoryIds(product.categoryId).includes(Number(c.id)),
+            )?.name
+          }
         </p>
         <h3 className="font-display text-base font-medium mb-3">
           {product.name}
