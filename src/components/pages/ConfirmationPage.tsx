@@ -3,6 +3,7 @@ import { useOrder } from "../../hooks/useOrder";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import { useEffect, useRef } from "react";
+import FallbackConfirmation from "../fallbacks/FallbackConfirmation";
 
 function ConfirmationPage() {
   const { id } = useParams<{ id: string }>();
@@ -21,6 +22,8 @@ function ConfirmationPage() {
     }
   }, [isSuccess, clearCart]);
 
+  if (isError) return <FallbackConfirmation />;
+
   return (
     <div className="flex flex-col gap-3 justify-center items-center">
       <p className="font-display text-(--accent) text-2xl italic">
@@ -38,11 +41,7 @@ function ConfirmationPage() {
       </p>
       <div className="flex flex-col gap-2 p-4 border border-(--muted-foreground)">
         {isPending && <p className="font-bold">Ordern skapas...</p>}
-        {isError && (
-          <p className="text-red-600 font-display text-2xl">
-            Betalningen gick inte genom. Vänligen försök igen
-          </p>
-        )}
+
         {isSuccess &&
           (() => {
             return (
