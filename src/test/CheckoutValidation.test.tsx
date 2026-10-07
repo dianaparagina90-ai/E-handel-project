@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import CustomerInfoForm from "../components/CustomerInfoForm";
+import CustomerInfoForm from "../components/forms/CustomerInfoForm";
 import CheckoutPage from "../components/pages/CheckoutPage";
 import { BrowserRouter } from "react-router-dom";
 

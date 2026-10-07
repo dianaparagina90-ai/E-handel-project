@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { customerInfoSchema, type CustomerInfo } from "../schemas/checkout";
+import { customerInfoSchema, type CustomerInfo } from "../../schemas/checkout";
 
 function CustomerInfoForm({
   onNext,

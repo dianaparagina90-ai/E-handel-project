@@ -1,11 +1,11 @@
 import { useState } from "react";
-import CustomerInfoForm from "../CustomerInfoForm";
-import ShippingForm from "../ShippingForm";
-import PaymentForm from "../PaymentForm";
+import CustomerInfoForm from "../forms/CustomerInfoForm";
+import ShippingForm from "../forms/ShippingForm";
+import PaymentForm from "../forms/PaymentForm";
 import type { CustomerInfo, Payment, Shipping } from "../../schemas/checkout";
 import { useCart } from "../../hooks/useCart";
 import { useProducts } from "../../hooks/useProducts";
-import CartItem from "./CartItem";
+import CartItem from "../cart/CartItem";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
@@ -71,11 +71,8 @@ function CheckoutPage() {
       orderDate: new Date().toISOString(),
     };
 
-    console.log("Order skapas: ", order);
-
     createOrder(order, {
       onSuccess: (data) => {
-        console.log("Skapad order: ", data);
         navigate(`/Confirmation/${data.id}`);
       },
       onError: (error) => {
@@ -186,6 +183,17 @@ function CheckoutPage() {
                   ? "Gratis ✓"
                   : `${(699 - subtotal).toLocaleString("sv-SE")} kr kvar till gratis frakt`}
               </span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-(--muted-foreground)">Fraktbelopp</span>
+
+              {shippingCost > 0 && subtotal < 699 ? (
+                <span className="text-xs text-(--accent)">
+                  {shippingCost.toLocaleString("sv-SE")} kr
+                </span>
+              ) : (
+                <span>0 kr</span>
+              )}
             </div>
             <div className="flex justify-between font-medium pt-2">
               <span>Totalt</span>

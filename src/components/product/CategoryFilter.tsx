@@ -1,4 +1,4 @@
-import type { Category } from "../types/types";
+import type { Category } from "../../types/types";
 
 function CategoryFilter({
   categories,
