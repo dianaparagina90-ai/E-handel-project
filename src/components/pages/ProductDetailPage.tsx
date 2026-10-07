@@ -1,11 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
 import { useCart } from "../../hooks/useCart";
-import { isOnSale, getDisplayPrice } from "../../utils/helpers";
+import { isOutOfStock, isOnSale, getDisplayPrice } from "../../utils/helpers";
+import OutOfStock from "../OutOfStockBadge";
 
 function ProductDetailPage() {
   const { id } = useParams();
-  const { addToCart } = useCart();
+  const { addToCart, cartItems } = useCart();
   const navigate = useNavigate();
 
   const productId = Number(id);
@@ -23,7 +24,7 @@ function ProductDetailPage() {
   if (!product.data) {
     return <p>Ingen produkt hittades.</p>;
   }
-
+  const outOfStock = isOutOfStock(product.data.product, cartItems);
   const onSale = isOnSale(product.data.product);
   const displayPrice = getDisplayPrice(product.data.product);
 
@@ -43,11 +44,13 @@ function ProductDetailPage() {
         {/* BILDSEKTION */}
         <div className="flex flex-col gap-y-6">
           {/* STOR PRODUKTBILD */}
-          <img
-            src={product.data.product.image}
-            alt={product.data.product.name}
-            className="w-full"
-          />
+          <OutOfStock product={product.data.product}>
+            <img
+              src={product.data.product.image}
+              alt={product.data.product.name}
+              className="w-full"
+            />
+          </OutOfStock>
 
           {/* SMÅ PRODUKTBILDER */}
           <div className="flex justify-start gap-3">
@@ -104,16 +107,19 @@ function ProductDetailPage() {
 
           {/* KNAPP */}
           <div className="pt-4">
-
-            <button className="w-full px-8 py-4 bg-[#c4607a] 
-            text-white font-base
-            hover:opacity-90 transition-opacity"
-            onClick={() => {
-              addToCart(product.data.product.id);
-            }}
-          >
-            LÄGG I VARUKORG
-          </button>
+            <button
+              className="w-full px-8 py-4 bg-[#c4607a] text-white font-base"
+              onClick={() => {
+                if (!outOfStock)
+                  addToCart(
+                    product.data.product.id,
+                    product.data.product.stock,
+                  );
+              }}
+              disabled={outOfStock}
+            >
+              {outOfStock ? "SLUT I LAGER" : "LÄGG I VARUKORGEN"}
+            </button>
           </div>
         </div>
       </div>

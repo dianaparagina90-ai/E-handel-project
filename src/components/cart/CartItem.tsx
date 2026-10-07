@@ -80,8 +80,9 @@ const CartItem = ({
             </button>
             <span className="w-8 text-center">{quantity}</span>
             <button
-              className="w-8 h-8 flex items-center justify-center transition-opacity hover:opacity-50"
+              className="w-8 h-8 flex items-center justify-center transition-opacity hover:opacity-50 disabled:opacity-30 disabled:cursor-not-allowed"
               onClick={onIncrease}
+              disabled={quantity >= product.stock}
             >
               +
             </button>

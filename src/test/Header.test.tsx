@@ -13,6 +13,10 @@ vi.mock("../hooks/useCart", () => ({
   }),
 }));
 
+vi.mock("../components/CartDrawer", () => ({
+  default: () => <div />,
+}));
+
 describe("Header", () => {
   afterEach(() => {
     cleanup();
