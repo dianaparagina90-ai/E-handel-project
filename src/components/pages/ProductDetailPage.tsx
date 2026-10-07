@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
 import { useCart } from "../../hooks/useCart";
 import { isOutOfStock, isOnSale, getDisplayPrice } from "../../utils/helpers";
-import OutOfStock from "../OutOfStockBadge";
+import OutOfStock from "../product/OutOfStockBadge";
 
 function ProductDetailPage() {
   const { id } = useParams();

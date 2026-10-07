@@ -8,10 +8,9 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import "./App.css";
 import CartItemProvider from "./components/context/CartItemContext";
-import ProductPageErrorBoundary from "./components/ProductPageErrorBoundary";
+import ProductPageErrorBoundary from "./components/fallbacks/ProductPageErrorBoundary";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackConfirmation from "./components/fallbacks/FallbackConfirmation";
-
 
 const App = () => {
   return (
@@ -21,12 +20,12 @@ const App = () => {
 
         <main className="flex-1">
           <Routes>
-            <Route 
-            path="/" 
-            element={
-              <ProductPageErrorBoundary>
-                <ProductPage />
-              </ProductPageErrorBoundary>
+            <Route
+              path="/"
+              element={
+                <ProductPageErrorBoundary>
+                  <ProductPage />
+                </ProductPageErrorBoundary>
               }
             />
             <Route path="/ProductDetail/:id" element={<ProductDetailPage />} />
