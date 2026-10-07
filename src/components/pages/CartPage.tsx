@@ -70,7 +70,7 @@ function CartPage() {
                   product={product}
                   quantity={carItem.quantity}
                   editable={true}
-                  onIncrease={() => increaseQuantity(product.id)}
+                  onIncrease={() => increaseQuantity(product.id, product.stock)}
                   onDecrease={() => decreaseQuantity(product.id)}
                   onRemove={() => removeFromCart(product.id)}
                 />

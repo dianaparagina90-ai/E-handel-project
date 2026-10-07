@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import type { Product } from "../types/types";
 import cartIcon from "../assets/cartIcon.png";
 import { useCart } from "../hooks/useCart";
-import { isOnSale, getDisplayPrice } from "../utils/helpers";
+import { isOutOfStock, isOnSale, getDisplayPrice } from "../utils/helpers";
+import OutOfStockBadge from "./OutOfStockBadge";
 
 function ProductCard({
   product,
@@ -11,8 +12,10 @@ function ProductCard({
   product: Product;
   categoryName?: string;
 }) {
-  const { addToCart } = useCart();
+  const { addToCart, cartItems } = useCart();
   const navigate = useNavigate();
+
+  const outOfStock = isOutOfStock(product, cartItems);
 
   const onSale = isOnSale(product);
   const displayPrice = getDisplayPrice(product);
@@ -22,12 +25,14 @@ function ProductCard({
       className="relative shadow-sm hover:shadow-xl transition-shadow"
       onClick={() => navigate(`/ProductDetail/${product.id}`)}
     >
-      <div className="aspect-3/4 bg-(--card) overflow-hidden">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover"
-        />
+      <div className="aspect-3/4 bg-(--card) overflow-hidden relative">
+        <OutOfStockBadge product={product}>
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover"
+          />
+        </OutOfStockBadge>
       </div>
       <div className="flex flex-col gap-1 p-1.5">
         {categoryName && (
@@ -52,10 +57,11 @@ function ProductCard({
       <button
         onClick={(e) => {
           e.stopPropagation();
-          addToCart(product.id);
+          if (!outOfStock) addToCart(product.id, product.stock);
         }}
+        disabled={outOfStock}
         aria-label="Lägg till i kundvagn"
-        className="absolute bottom-2 right-2 cursor-pointer hover:bg-(--border) hover:rounded-full hover:p-1 active:cursor-grabbing "
+        className="absolute bottom-2 right-2 cursor-pointer hover:bg-(--border) hover:rounded-full hover:p-1 active:cursor-grabbing disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
       >
         <img
           src={cartIcon}
