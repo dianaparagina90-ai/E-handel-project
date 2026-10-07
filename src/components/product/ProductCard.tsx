@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import type { Product } from "../types/types";
-import cartIcon from "../assets/cartIcon.png";
-import { useCart } from "../hooks/useCart";
-import { isOnSale, getDisplayPrice } from "../utils/helpers";
+import type { Product } from "../../types/types";
+import cartIcon from "../../assets/cartIcon.png";
+import { useCart } from "../../hooks/useCart";
+import { isOnSale, getDisplayPrice } from "../../utils/helpers";
 
 function ProductCard({
   product,

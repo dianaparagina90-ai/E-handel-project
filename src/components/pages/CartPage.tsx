@@ -3,7 +3,7 @@ import { useCart } from "../../hooks/useCart";
 import { useProducts } from "../../hooks/useProducts";
 import { getDisplayPrice } from "../../utils/helpers";
 
-import CartItem from "./CartItem";
+import CartItem from "../cart/CartItem";
 
 function CartPage() {
   const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } =
@@ -41,7 +41,7 @@ function CartPage() {
     );
   }
 
-  const totalPrice = cartItems.reduce((total, cartItem) => {
+  const subtotal = cartItems.reduce((total, cartItem) => {
     const product = products?.find(
       (product) => product.id === cartItem.productId,
     );
@@ -50,6 +50,9 @@ function CartPage() {
 
     return total + getDisplayPrice(product) * cartItem.quantity;
   }, 0);
+
+  const shippingCost = subtotal >= 699 ? 0 : 59;
+  const total = subtotal + shippingCost;
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
@@ -97,25 +100,33 @@ function CartPage() {
                 <span style={{ color: "var(--muted-foreground)" }}>
                   Delsumma
                 </span>
-                <span> {totalPrice.toLocaleString("sv-SE")} kr </span>
+                <span> {subtotal.toLocaleString("sv-SE")} kr </span>
               </div>
               <div className="flex justify-between">
                 <span style={{ color: "var(--muted-foreground)" }}>Frakt</span>
                 <span className="text-xs" style={{ color: "var(--accent)" }}>
-                  {totalPrice >= 699
+                  {shippingCost === 0
                     ? "Gratis ✓"
-                    : `${(699 - totalPrice).toLocaleString("sv-SE")} kr kvar till gratis frakt`}{" "}
+                    : `${(699 - subtotal).toLocaleString("sv-SE")} kr kvar till gratis frakt`}{" "}
                 </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-(--muted-foreground)">Fraktbelopp</span>
+
+                {shippingCost > 0 && subtotal < 699 ? (
+                  <span className="text-xs text-(--accent)">
+                    {shippingCost.toLocaleString("sv-SE")} kr
+                  </span>
+                ) : (
+                  <span>0 kr</span>
+                )}
               </div>
             </div>
 
             <div className="flex justify-between font-medium mb-6">
               <span>Totalt</span>
               <span>
-                {(totalPrice >= 699
-                  ? totalPrice
-                  : totalPrice + 59
-                ).toLocaleString("sv-SE")}
+                {total.toLocaleString("sv-SE")}
                 kr
               </span>
             </div>

@@ -1,20 +1,20 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { shippingSchema, type Shipping } from "../schemas/checkout";
+import { paymentSchema, type Payment } from "../../schemas/checkout";
 
-function ShippingForm({
+function PaymentForm({
   onNext,
   defaultValues,
 }: {
-  onNext: (data: Shipping) => void;
-  defaultValues?: Shipping | null;
+  onNext: (data: Payment) => void;
+  defaultValues?: Payment | null;
 }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Shipping>({
-    resolver: zodResolver(shippingSchema),
+  } = useForm<Payment>({
+    resolver: zodResolver(paymentSchema),
     defaultValues: defaultValues ?? undefined,
   });
 
@@ -26,16 +26,16 @@ function ShippingForm({
     >
       <div className="flex flex-col gap-2">
         <label className="flex items-center gap-2">
-          <input type="radio" value="dhl" {...register("method")} />
-          DHL
+          <input type="radio" value="kort" {...register("method")} />
+          Kort
         </label>
         <label className="flex items-center gap-2">
-          <input type="radio" value="schenker" {...register("method")} />
-          Schenker
+          <input type="radio" value="swish" {...register("method")} />
+          Swish
         </label>
         <label className="flex items-center gap-2">
-          <input type="radio" value="postnord" {...register("method")} />
-          Postnord
+          <input type="radio" value="klarna" {...register("method")} />
+          Klarna
         </label>
         {errors.method && (
           <p className="text-red-950 text-sm">{errors.method.message}</p>
@@ -45,4 +45,4 @@ function ShippingForm({
   );
 }
 
-export default ShippingForm;
+export default PaymentForm;
