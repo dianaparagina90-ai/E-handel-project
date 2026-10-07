@@ -6,6 +6,7 @@ export interface Product {
   image: string;
   description: string;
   onSale: boolean;
+  stock: number;
 }
 
 export interface Category {
