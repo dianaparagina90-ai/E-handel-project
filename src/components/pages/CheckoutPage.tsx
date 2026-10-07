@@ -14,6 +14,8 @@ import { useCreateOrder } from "../../hooks/useCreateOrder";
 import type { Order } from "../../types/types";
 import { useNavigate } from "react-router-dom";
 import { getDisplayPrice } from "../../utils/helpers";
+import { updateProductStock } from "../../api/products";
+import { useQueryClient } from "@tanstack/react-query";
 
 type CheckoutStep = 1 | 2 | 3;
 
@@ -22,6 +24,7 @@ function CheckoutPage() {
   const { data: products } = useProducts();
   const { mutate: createOrder, isPending } = useCreateOrder();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const [step, setStep] = useState<CheckoutStep>(1);
 
@@ -74,8 +77,21 @@ function CheckoutPage() {
     console.log("Order skapas: ", order);
 
     createOrder(order, {
-      onSuccess: (data) => {
+      onSuccess: async (data) => {
         console.log("Skapad order: ", data);
+
+        await Promise.all(
+          orderItems.map((item) => {
+            const product = products?.find((p) => p.id === item.productId);
+            if (!product) return Promise.resolve();
+            return updateProductStock(
+              product.id,
+              product.stock - item.quantity,
+            );
+          }),
+        );
+        await queryClient.invalidateQueries({ queryKey: ["products"] });
+
         navigate(`/Confirmation/${data.id}`);
       },
       onError: (error) => {

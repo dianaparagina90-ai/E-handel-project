@@ -18,10 +18,8 @@ export function getDisplayPrice(product: Product): number {
 }
 
 // Stock
-function isOutOfStock(product: Product, cartItems: CartItem[]): boolean {
+export function isOutOfStock(product: Product, cartItems: CartItem[]): boolean {
   const currentInCart =
     cartItems.find((item) => item.productId === product.id)?.quantity ?? 0;
   return currentInCart >= product.stock;
 }
-
-export default isOutOfStock;

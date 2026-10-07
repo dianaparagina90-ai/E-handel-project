@@ -1,12 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
 import { useCart } from "../../hooks/useCart";
-import { isOnSale, getDisplayPrice } from "../../utils/helpers";
+import { isOutOfStock, isOnSale, getDisplayPrice } from "../../utils/helpers";
 import OutOfStock from "../OutOfStockBadge";
 
 function ProductDetailPage() {
   const { id } = useParams();
-  const { addToCart } = useCart();
+  const { addToCart, cartItems } = useCart();
   const navigate = useNavigate();
 
   const productId = Number(id);
@@ -24,7 +24,7 @@ function ProductDetailPage() {
   if (!product.data) {
     return <p>Ingen produkt hittades.</p>;
   }
-
+  const outOfStock = isOutOfStock(product.data.product, cartItems);
   const onSale = isOnSale(product.data.product);
   const displayPrice = getDisplayPrice(product.data.product);
 
@@ -110,13 +110,15 @@ function ProductDetailPage() {
             <button
               className="w-full px-8 py-4 bg-[#c4607a] text-white font-base"
               onClick={() => {
-                addToCart(product.data.product.id, product.data.product.stock);
+                if (!outOfStock)
+                  addToCart(
+                    product.data.product.id,
+                    product.data.product.stock,
+                  );
               }}
-              disabled={product.data.product.stock === 0}
+              disabled={outOfStock}
             >
-              {product.data.product.stock === 0
-                ? "SLUT I LAGER"
-                : "LÄGG I VARUKORGEN"}
+              {outOfStock ? "SLUT I LAGER" : "LÄGG I VARUKORGEN"}
             </button>
           </div>
         </div>

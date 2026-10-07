@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import type { Product } from "../types/types";
 import cartIcon from "../assets/cartIcon.png";
 import { useCart } from "../hooks/useCart";
-import isOutOfStock, { isOnSale, getDisplayPrice } from "../utils/helpers";
+import { isOutOfStock, isOnSale, getDisplayPrice } from "../utils/helpers";
 import OutOfStockBadge from "./OutOfStockBadge";
 
 function ProductCard({

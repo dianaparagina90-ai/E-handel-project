@@ -1,6 +1,6 @@
 import { useCart } from "../hooks/useCart";
 import type { Product } from "../types/types";
-import isOutOfStock from "../utils/helpers";
+import { isOutOfStock } from "../utils/helpers";
 
 function OutOfStock({
   product,
