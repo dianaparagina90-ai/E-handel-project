@@ -1,39 +1,99 @@
-# E-handel-project
+# 🛒 Fredrik's Angels
 
-Bygga en e-handelsapplikation med React och TypeScript.
+Fredrik's Angels är en webbshop byggd med React, TypeScript och Vite.
 
-- Satsar på G, men vi kör med TanStack Query.
-- Kundkorgens utseende: undersök Material UI eller andra relevanta bibliotek.
+## 🚀 Tech stack
 
-## Klart
+- React
+- TypeScript
+- Vite
+- React Router
+- CSS / Tailwind / MUI / Lucide / React icons
+- Vitest
+- react-error-boundary
+- React hook form
+- Zod
+- TanStack Query
 
-- Projektet har presenterats för Fredrik.
-- Diagrammet har gåtts igenom.
-- Tickets och issues har skapats i GitHub Kanban.
-- Följande huvuddelar har skapats:
+## 📋 Funktioner
 
-  - Products Page
-  - Product Details Page
-  - Cart Page
+- Visa produkter
+- Visa produktdetaljer
+- Lägga produkter i varukorg
+- Filtrera produkter
+- Ändra antal i varukorgen
+- Ta bort produkter från varukorgen
+- Lagersaldo
+- Checkout
+- Valideringsform
+- Visa orderbekräftelse
 
-- Varje huvuddel har fått tydliga beskrivningar och deluppgifter.
-- Tickets för Header och Footer har också skapats.
-- Bestäm om bilder, exempelvis logotypen, ska hämtas från `public` eller `assets`.
-- Bestäm om Cart Page ska vara en modal eller en egen sida.
-- Bestäm vilken data som ska finnas i Context.
+## 🛠️ Installation
 
-## Kvar att göra
+Klona repositoryt:
 
-- Varje person väljer en huvuddel att ansvara för:
-  - Products Page
-  - Product Details Page
-  - Cart Page
-- Skriv i chatten vilken huvuddel du vill ta och när du kan börja.
-- Om någon gör ändringar i en ticket ska det skrivas i chatten, så att alla har koll.
+```bash
+git clone <repository-url>
+```
 
+Installera dependencies:
 
-## Att göra sen
--kolla VG uppgifterna vad kan vi göra mer
--skapa ny branch för VG kraven så att inte förstora main
+```bash
+npm install
+```
 
+Starta utvecklingsservern:
 
+```bash
+npm start
+```
+
+Applikationen körs sedan på:
+
+```bash
+http://localhost:5173
+```
+
+## 📦 Scripts
+
+```bash
+npm run start     # Starta utvecklingsservern samt servern
+npm run build     # Bygg projektet för produktion
+npm run preview   # Förhandsvisa production build
+npm run test      # Kör tester
+```
+
+## 📁 Projektstruktur
+
+```bash
+src/
+├── components/
+│   ├── cart/
+│   ├── context/
+│   ├── fallbacks/
+│   ├── forms/
+│   ├── layout/
+│   ├── pages/
+│   └── product/
+├── api/
+├── assets/
+├── hooks/
+├── schemas/
+├── test/
+├── types/
+├── utils/
+├── App.tsx
+└── main.tsx
+```
+
+## 🔌 API
+
+Projektet använder en lokal JSON-fil för produktdata.
+
+Produktinformationen används bland annat för att visa produkter, produktdetaljer, priser och lagersaldo.
+
+## 👥 Team
+
+Diana Paragina
+Nicole Arezo Sadeghi
+Saga Engström Lundgren

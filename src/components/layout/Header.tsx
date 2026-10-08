@@ -2,7 +2,7 @@ import CartDrawer from "../cart/CartDrawer";
 
 import { FiShoppingCart } from "react-icons/fi";
 import { useState } from "react";
-import Logo from "../../Logo";
+import Logo from "./Logo";
 
 import { useCart } from "../../hooks/useCart";
 import { SwipeableDrawer } from "@mui/material";

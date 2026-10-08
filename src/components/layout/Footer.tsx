@@ -1,7 +1,7 @@
 import { SlSocialInstagram } from "react-icons/sl";
 import { TiSocialFacebook } from "react-icons/ti";
 import { HiOutlineMail } from "react-icons/hi";
-import Logo from "../../Logo";
+import Logo from "./Logo";
 
 function Footer() {
   return (
