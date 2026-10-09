@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import CustomerInfoForm from "../components/forms/CustomerInfoForm";
 import CheckoutPage from "../components/pages/CheckoutPage";
 import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 //Mockade hooks
 vi.mock("../hooks/useCart", () => ({
@@ -59,11 +60,20 @@ describe("CheckoutValidation", () => {
   it("moves to the shipping step when customer information is valid", async () => {
     //Act
     const user = userEvent.setup();
+    const queryClient = new QueryClient({
+      defaultOptions: {
+        queries: { retry: false },
+        mutations: { retry: false },
+      },
+    });
 
     render(
-      <BrowserRouter>
-        <CheckoutPage />
-      </BrowserRouter>,
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <CheckoutPage />
+        </BrowserRouter>
+        ,
+      </QueryClientProvider>,
     );
 
     //Act
