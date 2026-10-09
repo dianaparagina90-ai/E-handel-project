@@ -15,11 +15,13 @@ const TestComponent = () => {
     decreaseQuantity,
   } = useCart();
 
+  const stock = 10;
+
   return (
     <div>
-      <button onClick={() => addToCart(1)}>Add</button>
+      <button onClick={() => addToCart(1, stock)}>Add</button>
       <button onClick={() => removeFromCart(1)}>Remove</button>
-      <button onClick={() => increaseQuantity(1)}>Increase</button>
+      <button onClick={() => increaseQuantity(1, stock)}>Increase</button>
       <button onClick={() => decreaseQuantity(1)}>Decrease</button>
 
       <span data-testid="quantity">
